@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes Onori | Official Web</title>
+  <link rel="icon" type="image/x-icon" href="./assets/logo.png">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  
+  <style>
+    /* 1. RESET Y BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Arial', sans-serif; color: #fff; background-color: #0b0c0d; line-height: 1.5; overflow-x: hidden; }
+
+    /* 2. NAVBAR */
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 50px; margin: 10px 60px; background-color: rgba(0, 0, 0, 0.85);
+      position: fixed; width: calc(100% - 120px); top: 0; z-index: 1000;
+      border-radius: 45px; transition: all 0.5s ease;
+    }
+    .navbar2 ul { list-style: none; display: flex; gap: 30px; }
+    .navbar2 a { color: #fff; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 14px; text-decoration: none; }
+    .logo img { height: 50px; filter: invert(1); }
+
+    /* 3. HERO */
+    .hero-section {
+      height: 100vh; display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hermes-portada3.jpg');
+      background-size: cover; background-position: center top;
+    }
+    .hero-content { text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .hero-title { 
+      font-family: 'Rajdhani', sans-serif; font-size: clamp(40px, 8vw, 90px); 
+      letter-spacing: clamp(10px, 3vw, 35px); text-indent: clamp(10px, 3vw, 35px); 
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+
+    /* 4. BOTONES */
+    .cta-btn {
+      background-color: #d6c68d !important; color: #000 !important;
+      padding: 15px 35px !important; font-family: 'Oswald', sans-serif !important;
+      font-weight: 700 !important; font-size: 18px !important;
+      border-radius: 15px !important; text-transform: uppercase !important;
+      display: inline-block !important; text-decoration: none !important;
+      cursor: pointer !important; transition: transform 0.3s ease !important;
+      border: none; text-align: center;
+    }
+    .cta-btn:hover { transform: scale(1.05) !important; background-color: #bca56d !important; }
+
+    /* 5. CUESTIONARIO Y PANELES */
+    .cuestionario-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; flex: 1 1 500px; max-width: 560px; }
+    .qar-option { display:block; cursor:pointer; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:12px; margin-bottom:10px; background:rgba(255,255,255,.04); }
+    .qar-input { color:#fff; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.15); width:100%; padding:10px; border-radius:10px; margin-bottom: 10px; }
+    .btn-quiz { border-radius:12px; padding:10px 16px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); cursor:pointer; color:#fff; font-family: 'Oswald'; }
+    .btn-primary { background:#2563eb; border-color:#2563eb; }
+
+    /* 6. PLANES */
+    .planes-section { background-color: #0f0f0f; padding: 100px 20px 80px 20px; text-align: center; }
+    .planes-title { font-family: 'Oswald', sans-serif; font-size: 2.8rem; text-transform: uppercase; margin-bottom: 40px; }
+    .planes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+    .plan-card { background-color: #1a1a1a; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; }
+    .plan-img-link { display: block; width: 100%; cursor: pointer; position: relative; }
+    .plan-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+    .plan-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 5px; text-transform: uppercase; font-weight: bold; z-index: 5; }
+    .plan-new { position: absolute; top: 10px; left: 10px; background: #ff4747; color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 5px; text-transform: uppercase; font-weight: bold; z-index: 5; }
+    .plan-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .plan-info h3 { font-family: 'Oswald', sans-serif; color: #d6c68d; font-size: 1.15rem; text-transform: uppercase; margin-bottom: 8px; }
+    .plan-info h4 { font-size: 0.85rem; color: #c9cdd2; font-weight: 400; margin-bottom: 12px; min-height: 40px; }
+    .plan-price { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.6rem; margin-bottom: 15px; }
+
+    /* 7. COACHING */
+    .price__card { background-color: #1a1a1a; border-radius: 20px; padding: 40px; max-width: 600px; margin: 40px auto; border: 1px solid rgba(214, 198, 141, 0.2); text-align: center; position: relative; }
+    .price__card h1 { font-family: 'Oswald'; color: #d6c68d; font-size: 2rem; margin-bottom: 10px; }
+    .price__card h3 { font-family: 'Oswald'; font-size: 2.5rem; margin-bottom: 20px; }
+    .price__card p { text-align: left; margin: 8px 0; display: flex; align-items: center; gap: 10px; color: #c9cdd2; }
+    .price__card i { color: #d6c68d; font-size: 18px; }
+
+    .cupos-alerta {
+      display: inline-block; background-color: #ff4747; color: #fff; font-family: 'Oswald', sans-serif;
+      font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 6px; text-transform: uppercase;
+      margin-bottom: 15px; animation: pulseGlow 2s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 71, 0.4); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 71, 71, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 71, 0); }
+    }
+
+    /* 8. TESTIMONIOS (ESTILO DORADO) */
+    .testimonios-section { padding: 80px 0; background: #0b0c0d; overflow: hidden; }
+    .carousel-track { display: flex; gap: 20px; animation: slideContinuous 45s linear infinite; width: max-content; }
+    .testimonio-card { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .testimonio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; border: 1px solid rgba(214, 198, 141, 0.2); }
+    .testimonio-name { font-family: 'Oswald'; color: #d6c68d; text-transform: uppercase; margin-top: 10px; font-size: 1.2rem; }
+    .stars { color: #d6c68d; margin-bottom: 5px; font-size: 12px; }
+    @keyframes slideContinuous { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* 9. EFECTO REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) { .planes-grid { grid-template-columns: repeat(2, 1fr); } .navbar { margin: 10px; width: calc(100% - 20px); } }
+    @media (max-width: 600px) {
+      .planes-grid { grid-template-columns: 1fr; }
+      .navbar { margin: 10px; width: calc(100% - 20px); padding: 10px; border-radius: 25px; }
+      .navbar2 { display: none; }
+      .hero-title { font-size: 38px; letter-spacing: 5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    window.scrollTo(0, 0);
+  </script>
+
+  <header class="navbar">
+    <div class="logo"><img src="./assets/logo.png" alt="Logo"></div>
+    <nav class="navbar2">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main id="inicio" class="hero-section">
+    <div class="hero-content reveal">
+      <h1 class="hero-title">HERMES ONORI</h1>
+      <a href="#planes" class="cta-btn">Comenzá Ya!</a>
+    </div>
+  </main>
+
+  <section id="sobre-mi" style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; background-color:#0b0c0d; padding:100px 24px;">
+    
+    <div class="cuestionario-box reveal">
+      <h2 style="font-family:'Oswald'; font-size:44px; margin-bottom:15px;">Sobre mí</h2>
+      <p style="color:#c9cdd2; font-size:18px; line-height:1.6; margin-bottom:20px;">
+        Soy Hermes Onori. Personal trainer, ingeniero y ex competidor de físico culturismo. Con 15 años de experiencia, mi objetivo es guiarte hacia tu mejor versión física y mental.
+      </p>
+      <img src="./assets/Portada_final.webp" alt="Hermes" style="width:100%; border-radius:16px; aspect-ratio:16/9; object-fit:cover;">
+    </div>
+
+    <div class="cuestionario-box reveal">
+      <h2 style="text-align:center; font-family:'Oswald'; margin-bottom:10px; color:#fff;">Encontrá tu Plan</h2>
+      <div id="qar-progress" style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;font-size:.9rem;opacity:.8;">
+          <span>Paso <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span>
+        </div>
+        <div style="height:6px;background:#2a2a2a;border-radius:99px;overflow:hidden;">
+          <div id="qar-bar" style="height:6px;width:0;background:#2563eb;transition:0.3s;"></div>
+        </div>
+      </div>
+      <div id="qar-wrap"></div>
+    </div>
+  </section>
+
+  <section id="planes" class="planes-section">
+    <h2 class="planes-title reveal">Planes de Entrenamiento</h2>
+    <div class="planes-grid">
+      <div class="plan-card reveal">
+        <a href="https://shop.hermesonori.com/productos/programa-desafio-verano/" class="plan-img-link" target="_blank">
+            <div class="plan-new">NEW</div>
+            <div class="plan-tag">3, 4 o 5 días de Gym</div>
+            <img src="./programas/VERANO.webp" alt="Verano">
+        </a>
+        <div class="plan-info">
+            <h3>Definición (Desafío Verano)</h3>
+            <h4>Balance perfecto entre Definición y Masa muscular</h4>
+            <p class="plan-price">$65.000</p>
+            <a href="https://shop.hermesonori.com/productos/programa-desafio-verano/" class="cta-btn" target="_blank" style="width:100%; font-size:14px; padding:10px !important;">Comprar</a>
+        </div>
+      </div>
+      <div class="plan-card reveal">
+        <a href="https://shop.hermesonori.com/productos/programa-atleta-hibrido/" class="plan-img-link" target="_blank">
+            <div class="plan-tag">5 días Gym y Funcional</div>
+            <img src="./programas/HYBRID.webp" alt="Hybrid">
+        </a>
+        <div class="plan-info">
+            <h3>Hybrid Athlete</h3>
+            <h4>Estado Atlético y Musculatura (Cardio exigente)</h4>
+            <p class="plan-price">$65.000</p>
+            <a href="https://shop.hermesonori.com/productos/programa-atleta-hibrido/" class="cta-btn" target="_blank" style="width:100%; font-size:14px; padding:10px !important;">Comprar</a>
+        </div>
+      </div>
+      <div class="plan-card reveal">
+        <a href="https://shop.hermesonori.com/productos/programa-movie-star/" class="plan-img-link" target="_blank">
+            <div class="plan-tag">4 y 5 días de Gym (Circuitos)</div>
+            <img src="./programas/MOVIESTAR1.webp" alt="Movie">
+        </a>
+        <div class="plan-info">
+            <h3>Movie Star</h3>
+            <h4>Tono Muscular y Definición mediante circuitos</h4>
+            <p class="plan-price">$65.000</p>
+            <a href="https://shop.hermesonori.com/productos/programa-movie-star/" class="cta-btn" target="_blank" style="width:100%; font-size:14px; padding:10px !important;">Comprar</a>
+        </div>
+      </div>
+      <div class="plan-card reveal">
+        <a href="https://shop.hermesonori.com/productos/programa-body-builder/" class="plan-img-link" target="_blank">
+            <div class="plan-tag">5 días de Gym</div>
+            <img src="./programas/BODYB1.webp" alt="Body">
+        </a>
+        <div class="plan-info">
+            <h3>Body-Builder</h3>
+            <h4>Fuerza y Masa Muscular Focus</h4>
+            <p class="plan-price">$65.000</p>
+            <a href="https://shop.hermesonori.com/productos/programa-body-builder/" class="cta-btn" target="_blank" style="width:100%; font-size:14px; padding:10px !important;">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="coaching" style="padding: 60px 20px; background: #0b0c0d;">
+    <div class="price__card reveal">
+        <div class="cupos-alerta">🔥 1 Cupo disponible</div>
+        <h1>COACHING PERSONAL - 3 MESES</h1>
+        <h4>Para los más exigentes | Contacto directo</h4>
+        <h3>699 U$D</h3>
+        <div style="display: inline-block; margin-bottom: 30px; text-align:left;">
+          <p><i class="ri-checkbox-circle-line"></i> Entrevista introductoria (Google Meet)</p>
+          <p><i class="ri-checkbox-circle-line"></i> Contacto directo vía WhatsApp</p>
+          <p><i class="ri-checkbox-circle-line"></i> Basado en tu situación actual</p>
+          <p><i class="ri-checkbox-circle-line"></i> Orientado a tus objetivos</p>
+          <p><i class="ri-checkbox-circle-line"></i> Actualizaciones mensuales & Seguimiento</p>
+          <p><i class="ri-checkbox-circle-line"></i> Bloques de Entrenamiento Personalizados</p>
+          <p><i class="ri-checkbox-circle-line"></i> Guía Nutricional & Suplementación</p>
+        </div>
+        <a href="coaching.html" class="cta-btn" style="width:100%;">COMENZÁ YA</a>
+    </div>
+  </section>
+
+  <section id="testimonios" class="testimonios-section">
+    <h2 style="text-align:center; font-family:'Oswald'; font-size:3rem; margin-bottom:40px;" class="reveal">TESTIMONIOS</h2>
+    <div class="carousel-track">
+      <div class="testimonio-card"><p class="testimonio-name">Ignacio</p><div class="stars">★★★★★</div><img src="./cambios/cambio2.png" alt="T2"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Hermes</p><div class="stars">★★★★★</div><img src="./cambios/cambio3.png" alt="T3"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Emi</p><div class="stars">★★★★★</div><img src="./cambios/cambio4.png" alt="T4"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Valentino</p><div class="stars">★★★★★</div><img src="./cambios/cambio5.png" alt="T5"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Franco</p><div class="stars">★★★★★</div><img src="./cambios/cambio6.webp" alt="T6"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Marco</p><div class="stars">★★★★★</div><img src="./cambios/cambio7.webp" alt="T7"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Arturo</p><div class="stars">★★★★★</div><img src="./cambios/cambio8.webp" alt="T8"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Diego</p><div class="stars">★★★★★</div><img src="./cambios/cambio9.webp" alt="T9"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Juan</p><div class="stars">★★★★★</div><img src="./cambios/cambio10.webp" alt="T10"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Ignacio</p><div class="stars">★★★★★</div><img src="./cambios/cambio2.png" alt="T2"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Hermes</p><div class="stars">★★★★★</div><img src="./cambios/cambio3.png" alt="T3"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Emi</p><div class="stars">★★★★★</div><img src="./cambios/cambio4.png" alt="T4"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Valentino</p><div class="stars">★★★★★</div><img src="./cambios/cambio5.png" alt="T5"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Franco</p><div class="stars">★★★★★</div><img src="./cambios/cambio6.webp" alt="T6"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Marco</p><div class="stars">★★★★★</div><img src="./cambios/cambio7.webp" alt="T7"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Arturo</p><div class="stars">★★★★★</div><img src="./cambios/cambio8.webp" alt="T8"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Diego</p><div class="stars">★★★★★</div><img src="./cambios/cambio9.webp" alt="T9"></div>
+      <div class="testimonio-card"><p class="testimonio-name">Juan</p><div class="stars">★★★★★</div><img src="./cambios/cambio10.webp" alt="T10"></div>
+    </div>
+  </section>
+
+  <script>
+    /* LÓGICA CUESTIONARIO */
+    (function(){
+      const QUESTIONS = [
+        { key:'goal', label:'¿Qué objetivo buscás?', options:[
+          { value:'beach_body', label:'Balance entre Definición y Masa muscular' },
+          { value:'muscle_gain', label:'Masa muscular, fuerza y Volumen' },
+          { value:'sports_performance', label:'Rendimiento deportivo y estado Atlético' }
+        ]},
+        { key:'style', label:'Tipo de entrenamiento', options:[
+          { value:'classic', label:'Rutinas de Gimnasio' },
+          { value:'circuits', label:'Gym con Circuitos dinámicos' },
+          { value:'short_routines', label:'Rutinas cortas y efectivas' }
+        ]},
+        { key:'cardio', label:'¿Cuánta actividad aeróbica?', options:[
+          { value:'health', label:'Únicamente por salud' },
+          { value:'moderate', label:'Moderada' },
+          { value:'pro', label:'Exigente' }
+        ]},
+        { key:'experience', label:'¿Cuánto tiempo llevás entrenando?', options:[
+          { value:'lt1', label:'Menos de 1 año' },
+          { value:'gt1', label:'Más de 1 año' }
+        ]},
+        { key:'metrics', label:'Tus métricas', fields:[
+          { id:'age', placeholder:'Edad' },
+          { id:'weight', placeholder:'Peso (kg)' }
+        ]}
+      ];
+
+      const PLANS = {
+        VERANO: { title:'Desafío Verano', subtitle:'Ideal para definir', img:'./programas/VERANO.webp', url:'https://shop.hermesonori.com/productos/programa-desafio-verano/' },
+        HYBRID: { title:'Hybrid Athlete', subtitle:'Estado Atlético', img:'./programas/HYBRID.webp', url:'https://shop.hermesonori.com/productos/programa-atleta-hibrido/' },
+        MOVIESTAR: { title:'Movie Star', subtitle:'Tono muscular', img:'./programas/MOVIESTAR1.webp', url:'https://shop.hermesonori.com/productos/programa-movie-star/' },
+        BODYBUILDER: { title:'Body-Builder', subtitle:'Fuerza y Masa', img:'./programas/BODYB1.webp', url:'https://shop.hermesonori.com/productos/programa-body-builder/' }
+      };
+
+      function rankPlans(a){
+        const s={VERANO:0,HYBRID:0,BODYBUILDER:0,MOVIESTAR:0};
+        if(a.goal==='beach_body'){ s.MOVIESTAR++; s.VERANO++; }
+        if(a.goal==='muscle_gain'){ s.BODYBUILDER++; }
+        const p={VERANO:4,HYBRID:3,BODYBUILDER:2,MOVIESTAR:1};
+        return Object.entries(s).sort((a,b)=>(b[1]-a[1])||(p[b[0]]-p[a[0]])).map(([k])=>k);
+      }
+
+      let step = 0; const ans = {};
+      const wrap = document.getElementById('qar-wrap');
+
+      function renderStep(){
+        if(step < QUESTIONS.length){
+          const q = QUESTIONS[step];
+          const pct = Math.round((step / QUESTIONS.length) * 100);
+          document.getElementById('qar-step').textContent = step + 1;
+          document.getElementById('qar-pct').textContent = pct + '%';
+          document.getElementById('qar-bar').style.width = pct + '%';
+
+          let h = `<h3 style="font-size:1.1rem;margin-bottom:15px; font-family:'Oswald'; color:#fff;">${q.label}</h3>`;
+          if(q.options){
+            h += q.options.map(o => `<label class="qar-option"><input type="radio" name="q" value="${o.value}" style="margin-right:8px;"> ${o.label}</label>`).join('');
+          } else {
+            h += q.fields.map(f => `<input id="${f.id}" placeholder="${f.placeholder}" class="qar-input">`).join('');
+          }
+          h += `<div style="display:flex;gap:10px;margin-top:15px;">
+                  <button class="btn-quiz" onclick="window.prevQ()" ${step===0?'style="display:none"':''}>Atrás</button>
+                  <button class="btn-quiz btn-primary" onclick="window.nextQ()" style="flex:1">${step===QUESTIONS.length-1?'Ver Resultado':'Siguiente'}</button>
+                </div>`;
+          wrap.innerHTML = h;
+        } else {
+          const order = rankPlans(ans);
+          const p = PLANS[order[0]];
+          wrap.innerHTML = `<div style="text-align:center;"><h3 style="font-family:'Oswald'; color:#d6c68d;">${p.title}</h3><p style="margin-bottom:15px;">Plan ideal para tus objetivos.</p><img src="${p.img}" style="width:100%; border-radius:12px; margin-bottom:15px;"><a href="${p.url}" class="cta-btn" style="width:100%; padding:10px !important;">¡EMPEZAR YA!</a></div>`;
+        }
+      }
+      window.nextQ = () => { step++; renderStep(); };
+      window.prevQ = () => { step--; renderStep(); };
+      renderStep();
+    })();
+
+    /* LÓGICA REVEAL */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

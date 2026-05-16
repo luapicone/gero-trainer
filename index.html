@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hermes Onori - Fitness Coach</title>
+  <link rel="icon" type="image/x-icon" href="./assets/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #1c1c1c;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      padding: 80px 20px 40px;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-container {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 20px;
+      animation: spin 20s linear infinite;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .title-main {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .title-sub {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      color: #000;
+    }
+
+    .button.arg {
+      background: linear-gradient(to right, #ffffff, #cbe8ff);
+      color: #000;
+    }
+
+    .button.arg:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(to right, #f5fbff, #b8dbf9);
+    }
+
+    .button.world {
+      background: linear-gradient(to right, #003366, #007bff);
+      color: #fff;
+    }
+
+    .button.world:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(to right, #002244, #0066dd);
+    }
+
+    .subtitle {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      background-color: #111;
+    }
+
+    @media (max-width: 768px) {
+      .title-main { font-size: 1.6rem; }
+      .title-sub { font-size: 1rem; }
+      .buttons { flex-direction: column; gap: 12px; }
+      .button { font-size: 0.95rem; padding: 10px 22px; }
+      .logo-container { width: 60px; height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="./assets/triskel.png" alt="Triskel Celta">
+    </div>
+
+    <div class="title-main">Hermes Onori</div>
+    <div class="title-sub">Fitness Coach</div>
+
+    <div class="buttons">
+      <a href="pagina1.html" class="button arg">🇦🇷 ARGENTINA</a>
+      <a href="pagina2.html" class="button world">🌍 WORLDWIDE</a>
+    </div>
+
+    <p class="subtitle" id="tagline">Tu cambio empieza hoy.</p>
+  </div>
+
+  <footer>
+    Hermes Onori – Todos los derechos reservados
+  </footer>
+
+  <script>
+    // Detecta idioma y país usando la localización del navegador
+    const tagline = document.getElementById("tagline");
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code === "AR") {
+          tagline.textContent = "Tu cambio empieza hoy.";
+        } else {
+          tagline.textContent = "Your transformation starts today.";
+        }
+      })
+      .catch(() => {
+        // Fallback por defecto en inglés si no se puede detectar
+        tagline.textContent = "Your transformation starts today.";
+      });
+  </script>
+</body>
+</html>

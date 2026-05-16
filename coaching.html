@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago Coaching - Hermes Onori</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0b0c0d;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #1a1a1a;
+      padding: 40px 30px;
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+      max-width: 450px;
+      width: 100%;
+      border: 1px solid rgba(214, 198, 141, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 26px;
+      color: #d6c68d;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    /* ESTILO DEL PRECIO */
+    .price-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 38px;
+      color: #fff;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    /* URGENCIA CAMBIADA A CELESTE */
+    .urgency {
+      color: #33c9ff; /* <-- Color Celeste Vibrante */
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      animation: pulseText 2s infinite;
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* SISTEMA DE TOGGLES */
+    .toggle-wrapper {
+      margin-bottom: 15px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.3s;
+    }
+
+    .toggle-header {
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .toggle-header:hover {
+      background-color: rgba(214, 198, 141, 0.1);
+    }
+
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-wrapper.active .toggle-content {
+      max-height: 400px;
+      padding: 20px;
+    }
+
+    .toggle-wrapper.active {
+      border-color: #d6c68d;
+    }
+
+    .data-row {
+      text-align: left;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .data-label {
+      display: block;
+      color: #d6c68d;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .data-value {
+      word-break: break-all;
+      font-family: monospace;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 8px;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-copy {
+      background-color: #d6c68d;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 5px;
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    /* --- BOTONES DE CONTACTO MODIFICADOS --- */
+    .contact-btns {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column; /* Apilados para que el botón de WhatsApp destaque más */
+      gap: 12px;
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #25D366; /* Verde oficial WhatsApp */
+      color: #ffffff;
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+      border: 1px solid #25D366;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #128C7E; /* Verde más oscuro al pasar el mouse */
+      border-color: #128C7E;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp i {
+      font-size: 20px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .btn-whatsapp .subtext {
+      font-family: 'Arial', sans-serif;
+      font-size: 11px;
+      font-weight: normal;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-top: 2px;
+      opacity: 0.9;
+    }
+
+    .btn-email {
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .btn-email:hover {
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 11px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>COACHING 1V1 (3 MESES)</h1>
+    <div class="price-tag">$699 USD</div>
+    <div class="urgency">CUPOS LIMITADOS</div>
+
+    <div class="toggle-wrapper" id="cryptoToggle">
+      <div class="toggle-header" onclick="toggleOption('cryptoToggle')">
+        <span><i class="ri-bit-coin-line"></i> Pago Cripto (USDT)</span>
+        <i class="ri-arrow-down-s-line arrow"></i>
+      </div>
+      <div class="toggle-content">
+        <div class="data-row">
+          <span class="data-label">Red Obligatoria</span>
+          <span class="data-value" style="color: #d6c68d; font-weight:bold;">Tron (TRC20)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Dirección de Wallet</span>
+          <span class="data-value" id="walletAddr">TED7pttfR4ef9HzgFHcfYgsMBFvou1jVrd</span>
+        </div>
+        <button class="btn-copy" onclick="copyText('walletAddr')">Copiar Wallet</button>
+      </div>
+    </div>
+
+    <div class="toggle-wrapper" id="bankToggle">
+      <div class="toggle-header" onclick="toggleOption('bankToggle')">
+        <span><i class="ri-bank-line"></i> Transferencia USD</span>
+        <i class="ri-arrow-down-s-line arrow"></i>
+      </div>
+      <div class="toggle-content">
+        <div class="data-row">
+          <span class="data-label">Alias</span>
+          <span class="data-value" id="aliasBank">reciba.pusose.abaco</span>
+          <button class="btn-copy" style="width: auto; padding: 4px 10px; margin-top: 5px;" onclick="copyText('aliasBank')">Copiar Alias</button>
+        </div>
+        <div class="data-row">
+          <span class="data-label">CBU</span>
+          <span class="data-value" id="cbuBank">3220001888052062560017</span>
+          <button class="btn-copy" style="width: auto; padding: 4px 10px; margin-top: 5px;" onclick="copyText('cbuBank')">Copiar CBU</button>
+        </div>
+        <div style="font-size: 11px; opacity: 0.7; text-align: left;">Titular: Hermes Emmanuel Onori</div>
+      </div>
+    </div>
+
+    <div class="contact-btns">
+      <!-- BOTÓN WHATSAPP DESTACADO -->
+      <a href="https://wa.me/5491124071696" target="_blank" class="btn-whatsapp">
+        <div><i class="ri-whatsapp-line"></i> WHATSAPP</div>
+        <div class="subtext">Por consultas</div>
+      </a>
+      <!-- BOTÓN EMAIL SECUNDARIO -->
+      <a href="mailto:admin@hermesonori.com" class="btn-email">Email</a>
+    </div>
+
+    <footer>
+      Una vez realizado el envío, capturá el comprobante<br>
+      y envialo por whatsapp para comenzar con el Coaching.
+    </footer>
+  </div>
+
+  <script>
+    function toggleOption(id) {
+      const allWrappers = document.querySelectorAll('.toggle-wrapper');
+      const target = document.getElementById(id);
+      allWrappers.forEach(w => { if(w !== target) w.classList.remove('active'); });
+      target.classList.toggle('active');
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = "¡COPIADO!";
+        btn.style.backgroundColor = "#fff";
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.backgroundColor = "#d6c68d";
+        }, 1200);
+      });
+    }
+  </script>
+
+</body>
+</html>
