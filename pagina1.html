@@ -212,7 +212,8 @@
       align-items: start;
     }
     .about-visual {
-      min-height: 580px;
+      min-height: 500px;
+      margin-top: 28px;
       border-radius: 30px;
       border: 1px solid rgba(255,255,255,.08);
       background:
@@ -233,6 +234,98 @@
       color: #d8e0e5;
     }
     .about-points i { color: var(--accent); margin-top: 2px; }
+    .quiz-panel {
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+    }
+    .quiz-panel h3 { font-size: 2.4rem; }
+    .quiz-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 14px 0 10px;
+      color: #bec8ce;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .progress > div {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), #92ff6a);
+      transition: width .28s ease;
+    }
+    .quiz-question {
+      font-size: 1.02rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .quiz-option {
+      display: block;
+      cursor: pointer;
+      padding: 14px 15px;
+      margin-bottom: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      transition: border-color .22s ease, background .22s ease, transform .22s ease;
+    }
+    .quiz-option:hover {
+      border-color: rgba(200,255,71,.3);
+      background: rgba(200,255,71,.05);
+      transform: translateY(-1px);
+    }
+    .quiz-input {
+      width: 100%;
+      padding: 14px 15px;
+      margin-bottom: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+    }
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .quiz-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .quiz-btn-primary {
+      flex: 1;
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #091007;
+    }
+    .quiz-result img {
+      margin: 16px 0;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
 
     .programs-head,
     .results-head {
@@ -476,8 +569,15 @@
             <div><i class="ri-checkbox-circle-fill"></i><p>Coaching con seguimiento real para sostener el cambio.</p></div>
           </div>
         </div>
-        <div class="about-visual reveal"></div>
+        <div class="quiz-panel reveal">
+          <h3>Encontrá tu plan</h3>
+          <p class="copy" style="margin-top:8px;">Respondé estas preguntas y te marco el programa más alineado con tu objetivo.</p>
+          <div class="quiz-head"><span>Paso <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span></div>
+          <div class="progress"><div id="qar-bar"></div></div>
+          <div id="qar-wrap"></div>
+        </div>
       </div>
+      <div class="about-visual reveal"></div>
     </div>
   </section>
 
@@ -567,6 +667,87 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
     document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+    (function(){
+      const QUESTIONS = [
+        { key:'goal', label:'¿Qué objetivo buscás?', options:[
+          { value:'beach_body', label:'Balance entre definición y masa muscular' },
+          { value:'muscle_gain', label:'Masa muscular, fuerza y volumen' },
+          { value:'sports_performance', label:'Rendimiento deportivo y estado atlético' }
+        ]},
+        { key:'style', label:'Tipo de entrenamiento', options:[
+          { value:'classic', label:'Rutinas de gimnasio' },
+          { value:'circuits', label:'Gym con circuitos dinámicos' },
+          { value:'short_routines', label:'Rutinas cortas y efectivas' }
+        ]},
+        { key:'cardio', label:'¿Cuánta actividad aeróbica?', options:[
+          { value:'health', label:'Únicamente por salud' },
+          { value:'moderate', label:'Moderada' },
+          { value:'pro', label:'Exigente' }
+        ]},
+        { key:'experience', label:'¿Cuánto tiempo llevás entrenando?', options:[
+          { value:'lt1', label:'Menos de 1 año' },
+          { value:'gt1', label:'Más de 1 año' }
+        ]},
+        { key:'metrics', label:'Tus métricas', fields:[
+          { id:'age', placeholder:'Edad' },
+          { id:'weight', placeholder:'Peso (kg)' }
+        ]}
+      ];
+      const PLANS = {
+        VERANO: { title:'Desafío Verano', img:'./programas/VERANO.webp', url:'https://shop.hermesonori.com/productos/programa-desafio-verano/' },
+        HYBRID: { title:'Hybrid Athlete', img:'./programas/HYBRID.webp', url:'https://shop.hermesonori.com/productos/programa-atleta-hibrido/' },
+        MOVIESTAR: { title:'Movie Star', img:'./programas/MOVIESTAR1.webp', url:'https://shop.hermesonori.com/productos/programa-movie-star/' },
+        BODYBUILDER: { title:'Body-Builder', img:'./programas/BODYB1.webp', url:'https://shop.hermesonori.com/productos/programa-body-builder/' }
+      };
+      function rankPlans(a){
+        const s={VERANO:0,HYBRID:0,BODYBUILDER:0,MOVIESTAR:0};
+        if(a.goal==='beach_body'){ s.MOVIESTAR++; s.VERANO++; }
+        if(a.goal==='muscle_gain'){ s.BODYBUILDER++; }
+        if(a.goal==='sports_performance'){ s.HYBRID++; }
+        if(a.style==='classic'){ s.BODYBUILDER++; s.VERANO++; }
+        if(a.style==='circuits'){ s.MOVIESTAR++; }
+        if(a.style==='short_routines'){ s.VERANO++; }
+        const p={VERANO:4,HYBRID:3,BODYBUILDER:2,MOVIESTAR:1};
+        return Object.entries(s).sort((a,b)=>(b[1]-a[1])||(p[b[0]]-p[a[0]])).map(([k])=>k);
+      }
+      let step = 0; const ans = {}; const wrap = document.getElementById('qar-wrap');
+      function renderStep(){
+        if(step < QUESTIONS.length){
+          const q = QUESTIONS[step];
+          const pct = Math.round((step / QUESTIONS.length) * 100);
+          document.getElementById('qar-step').textContent = step + 1;
+          document.getElementById('qar-pct').textContent = pct + '%';
+          document.getElementById('qar-bar').style.width = pct + '%';
+          let h = `<div class="quiz-question">${q.label}</div>`;
+          if(q.options){
+            h += q.options.map(o => `<label class="quiz-option"><input type="radio" name="q" value="${o.value}" style="margin-right:8px"> ${o.label}</label>`).join('');
+          } else {
+            h += q.fields.map(f => `<input id="${f.id}" placeholder="${f.placeholder}" class="quiz-input">`).join('');
+          }
+          h += `<div class="quiz-actions"><button class="quiz-btn" onclick="window.prevQ()" ${step===0?'style="display:none"':''}>Atrás</button><button class="quiz-btn quiz-btn-primary" onclick="window.nextQ()">${step===QUESTIONS.length-1?'Ver resultado':'Siguiente'}</button></div>`;
+          wrap.innerHTML = h;
+        } else {
+          const p = PLANS[rankPlans(ans)[0]];
+          document.getElementById('qar-step').textContent = QUESTIONS.length;
+          document.getElementById('qar-pct').textContent = '100%';
+          document.getElementById('qar-bar').style.width = '100%';
+          wrap.innerHTML = `<div class="quiz-result"><h3 style="font-size:2.2rem">${p.title}</h3><p class="copy" style="margin-top:6px;">Este es el plan más alineado con tus objetivos.</p><img src="${p.img}" alt="${p.title}"><a href="${p.url}" class="btn btn-primary" style="width:100%;margin-top:4px">Empezar ahora</a></div>`;
+        }
+      }
+      window.nextQ = () => {
+        const q = QUESTIONS[step];
+        if (q?.options) {
+          const chosen = wrap.querySelector('input[name="q"]:checked');
+          if (!chosen) return alert('Elegí una opción');
+          ans[q.key] = chosen.value;
+        }
+        step++; renderStep();
+      };
+      window.prevQ = () => { step--; renderStep(); };
+      renderStep();
+    })();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.14 });
