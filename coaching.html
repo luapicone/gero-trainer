@@ -4,99 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hermes Onori | Coaching 1:1</title>
+  <link rel="icon" type="image/x-icon" href="./assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <style>
-    :root{--bg:#07090b;--panel:#11161b;--text:#edf3f4;--muted:#9aa8ae;--line:rgba(255,255,255,.08);--accent:#c7ff3b;--danger:#ff725c;--shadow:0 30px 90px rgba(0,0,0,.36)}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{min-height:100vh;font-family:'Barlow',sans-serif;color:var(--text);background:radial-gradient(circle at 20% 0%, rgba(199,255,59,.08), transparent 20%),linear-gradient(180deg,#0c1013 0%,#07090b 100%);display:grid;place-items:center;padding:24px;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.18;background:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);background-size:40px 40px;mask-image:radial-gradient(circle at center, black 36%, transparent 84%)}
-    .layout{width:min(1120px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch}
-    .panel{border-radius:32px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(17,22,27,.95), rgba(10,13,16,.92));box-shadow:var(--shadow);overflow:hidden;position:relative}
-    .panel::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(199,255,59,.10), transparent 38%, transparent 75%, rgba(255,114,92,.08));pointer-events:none}
-    .left{padding:34px}
-    .kicker{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(199,255,59,.22);background:rgba(199,255,59,.08);color:var(--accent);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
-    h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.4rem);line-height:.9;letter-spacing:.05em;margin-bottom:10px}
-    .sub{font-size:1.05rem;color:#d2dce0;line-height:1.7;max-width:46ch;margin-bottom:24px}
-    .price{display:flex;align-items:end;gap:14px;margin-bottom:22px}
-    .price strong{font-family:'Bebas Neue',sans-serif;font-size:4.8rem;line-height:.85;color:var(--accent);letter-spacing:.04em}
-    .price span{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;padding-bottom:10px}
-    .urgency{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,114,92,.12);border:1px solid rgba(255,114,92,.24);color:#ffd3cb;font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;margin-bottom:24px}
-    .feature-list{display:grid;gap:12px;margin-bottom:26px}
-    .feature{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
-    .feature i{color:var(--accent);font-size:1.1rem;margin-top:2px}.feature p{color:#d5dde1;line-height:1.55}
-    .note{color:var(--muted);font-size:.95rem;line-height:1.7}
-    .right{padding:26px;display:grid;gap:16px}
-    .pay-card{padding:18px 18px 20px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
-    .pay-head{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
-    .pay-head h2{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;letter-spacing:.06em}.pay-head i:last-child{font-size:1.35rem;color:var(--accent);transition:transform .25s}
-    .pay-card.active .pay-head i:last-child{transform:rotate(180deg)}
-    .pay-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;margin-top:0}
-    .pay-card.active .pay-body{grid-template-rows:1fr;margin-top:16px}
-    .pay-inner{overflow:hidden}
-    .field{margin-bottom:14px}.field label{display:block;color:var(--muted);font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
-    .value{padding:14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);word-break:break-all;font-family:ui-monospace, SFMono-Regular, Menlo, monospace}
-    .copy{margin-top:8px;border:none;background:var(--accent);color:#0a1008;padding:11px 14px;border-radius:14px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;cursor:pointer;width:100%}
-    .contact-actions{display:grid;gap:12px;margin-top:8px}
-    .contact{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:18px;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-weight:800;transition:.25s}
-    .contact.whatsapp{background:#25D366;color:#fff;box-shadow:0 18px 40px rgba(37,211,102,.18)}
-    .contact.email{border:1px solid var(--line);color:#fff;background:rgba(255,255,255,.03)}
-    .contact:hover{transform:translateY(-2px)}
-    .back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#dbe5e8;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;margin-bottom:8px}
-    .footer-note{padding-top:6px;color:#839198;font-size:.92rem;line-height:1.65}
-    @media (max-width: 900px){.layout{grid-template-columns:1fr}.left,.right{padding:22px}.price strong{font-size:4rem}}
-  </style>
+  <link rel="stylesheet" href="./assets/site.css">
 </head>
-<body>
-  <div class="layout">
-    <section class="panel left">
-      <a class="back" href="pagina1.html"><i class="ri-arrow-left-line"></i> Volver</a>
-      <div class="kicker"><i class="ri-shield-star-line"></i> Coaching premium</div>
-      <h1>Coaching 1:1<br>de 3 meses</h1>
-      <p class="sub">Un proceso para quienes quieren dejar de improvisar. Análisis inicial, dirección clara, contacto directo y un sistema diseñado alrededor de tu situación actual y tus objetivos reales.</p>
-      <div class="price"><strong>699 USD</strong><span>Acceso completo</span></div>
-      <div class="urgency"><i class="ri-fire-fill"></i> Cupos limitados</div>
-      <div class="feature-list">
+<body style="display:grid;place-items:center;min-height:100vh;padding:24px;">
+  <div class="layout-split">
+    <section class="card" style="position:relative;overflow:hidden;">
+      <a class="back-link" href="pagina1.html"><i class="ri-arrow-left-line"></i> Volver</a>
+      <div class="eyebrow"><i class="ri-shield-star-line"></i> Coaching premium</div>
+      <h1 class="hero-title" style="font-size:clamp(3.2rem,7vw,5.8rem);max-width:none;">Coaching 1:1<br>de 3 meses</h1>
+      <p class="hero-text" style="margin-top:10px;max-width:46ch;">Un proceso para quienes quieren dejar de improvisar. Análisis inicial, dirección clara, contacto directo y un sistema diseñado alrededor de tu situación actual y tus objetivos reales.</p>
+      <div class="price-wrap"><div class="price-main">699 USD</div><div class="price-sub">Acceso completo</div></div>
+      <div class="alert"><i class="ri-fire-fill"></i> Cupos limitados</div>
+      <div class="feature-list" style="margin-top:18px;">
         <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Entrevista introductoria por Google Meet para ordenar contexto, historial y objetivo.</p></div>
         <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Contacto directo por WhatsApp para seguimiento y resolución de dudas clave.</p></div>
         <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Bloques de entrenamiento personalizados según nivel, tiempos y capacidad de recuperación.</p></div>
         <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Guía nutricional y suplementación orientada a tu objetivo.</p></div>
         <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Actualizaciones mensuales y criterio técnico para ajustar el proceso.</p></div>
       </div>
-      <p class="note">Una vez realizado el pago, enviá el comprobante por WhatsApp para activar el onboarding y comenzar el proceso.</p>
+      <p class="note" style="margin-top:18px;">Una vez realizado el pago, enviá el comprobante por WhatsApp para activar el onboarding y comenzar el proceso.</p>
     </section>
 
-    <aside class="panel right">
+    <aside class="dual-grid" style="gap:16px;">
       <div class="pay-card active" id="cryptoToggle">
         <div class="pay-head" onclick="toggleOption('cryptoToggle')">
-          <h2><i class="ri-bit-coin-line"></i> Pago cripto (USDT)</h2>
-          <i class="ri-arrow-down-s-line"></i>
+          <div>
+            <div class="pay-title" style="display:flex;align-items:center;gap:10px;"><i class="ri-bit-coin-line"></i> Pago cripto (USDT)</div>
+            <p class="note" style="margin-top:6px;">Opción recomendada para pagos rápidos.</p>
+          </div>
+          <i class="ri-arrow-down-s-line" style="font-size:1.4rem;color:var(--accent)"></i>
         </div>
         <div class="pay-body"><div class="pay-inner">
-          <div class="field"><label>Red obligatoria</label><div class="value" style="color:var(--accent);font-weight:800">Tron (TRC20)</div></div>
-          <div class="field"><label>Dirección de wallet</label><div class="value" id="walletAddr">TED7pttfR4ef9HzgFHcfYgsMBFvou1jVrd</div><button class="copy" onclick="copyText('walletAddr', this)">Copiar wallet</button></div>
+          <div class="field"><label>Red obligatoria</label><div class="field-value" style="color:var(--accent);font-weight:700">Tron (TRC20)</div></div>
+          <div class="field"><label>Dirección de wallet</label><div class="field-value" id="walletAddr">TED7pttfR4ef9HzgFHcfYgsMBFvou1jVrd</div><button class="copy-btn" onclick="copyText('walletAddr', this)">Copiar wallet</button></div>
         </div></div>
       </div>
 
       <div class="pay-card" id="bankToggle">
         <div class="pay-head" onclick="toggleOption('bankToggle')">
-          <h2><i class="ri-bank-line"></i> Transferencia USD</h2>
-          <i class="ri-arrow-down-s-line"></i>
+          <div>
+            <div class="pay-title" style="display:flex;align-items:center;gap:10px;"><i class="ri-bank-line"></i> Transferencia USD</div>
+            <p class="note" style="margin-top:6px;">Cuenta bancaria para pago en dólares.</p>
+          </div>
+          <i class="ri-arrow-down-s-line" style="font-size:1.4rem;color:var(--accent)"></i>
         </div>
         <div class="pay-body"><div class="pay-inner">
-          <div class="field"><label>Alias</label><div class="value" id="aliasBank">reciba.pusose.abaco</div><button class="copy" onclick="copyText('aliasBank', this)">Copiar alias</button></div>
-          <div class="field"><label>CBU</label><div class="value" id="cbuBank">3220001888052062560017</div><button class="copy" onclick="copyText('cbuBank', this)">Copiar CBU</button></div>
-          <div class="field"><label>Titular</label><div class="value">Hermes Emmanuel Onori</div></div>
+          <div class="field"><label>Alias</label><div class="field-value" id="aliasBank">reciba.pusose.abaco</div><button class="copy-btn" onclick="copyText('aliasBank', this)">Copiar alias</button></div>
+          <div class="field"><label>CBU</label><div class="field-value" id="cbuBank">3220001888052062560017</div><button class="copy-btn" onclick="copyText('cbuBank', this)">Copiar CBU</button></div>
+          <div class="field"><label>Titular</label><div class="field-value">Hermes Emmanuel Onori</div></div>
         </div></div>
       </div>
 
-      <div class="contact-actions">
-        <a href="https://wa.me/5491124071696" target="_blank" class="contact whatsapp"><i class="ri-whatsapp-line"></i> WhatsApp</a>
-        <a href="mailto:admin@hermesonori.com" class="contact email"><i class="ri-mail-line"></i> Email</a>
+      <div class="card" style="padding:22px;">
+        <div class="contact-stack">
+          <a href="https://wa.me/5491124071696" target="_blank" class="contact whatsapp"><i class="ri-whatsapp-line"></i> WhatsApp</a>
+          <a href="mailto:admin@hermesonori.com" class="contact email"><i class="ri-mail-line"></i> Email</a>
+        </div>
+        <p class="note" style="margin-top:14px;">Mandá el comprobante por WhatsApp y se activa el inicio del coaching.</p>
       </div>
-      <div class="footer-note">Mandá el comprobante por WhatsApp y se activa el inicio del coaching.</div>
     </aside>
   </div>
 

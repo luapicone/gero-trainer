@@ -7,117 +7,168 @@
   <link rel="icon" type="image/x-icon" href="./assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <style>
-    :root {
-      --bg:#07090b;--bg-2:#0c1013;--panel:#10161b;--text:#eef3f5;--muted:#98a7ae;--line:rgba(255,255,255,.08);--accent:#c7ff3b;--danger:#ff725c;--shadow:0 30px 90px rgba(0,0,0,.34);--radius:28px;
-    }
-    *{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
-    body{font-family:'Barlow',sans-serif;color:var(--text);background:radial-gradient(circle at 15% 10%, rgba(199,255,59,.08), transparent 22%),radial-gradient(circle at 85% 0%, rgba(255,255,255,.06), transparent 18%),linear-gradient(180deg,#0c1013 0%,#07090b 30%,#07090b 100%);overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.18;background:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);background-size:40px 40px;mask-image:radial-gradient(circle at center, black 40%, transparent 86%)}
-    img{max-width:100%;display:block}.container{width:min(1240px,calc(100% - 32px));margin:0 auto}
-    .navbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;width:min(1240px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--line);border-radius:24px;background:rgba(8,11,14,.7);backdrop-filter:blur(16px);box-shadow:var(--shadow)}
-    .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text)} .brand-mark{width:48px;height:48px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.03)} .brand-mark img{width:70%;height:70%;object-fit:contain;filter:brightness(0) invert(1)} .brand-text strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.08em;line-height:.9} .brand-text span{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-    .nav-links{display:flex;gap:22px;list-style:none}.nav-links a{text-decoration:none;color:#d8e0e4;text-transform:uppercase;font-weight:700;letter-spacing:.14em;font-size:.78rem}.nav-cta{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:16px;text-decoration:none;background:var(--accent);color:#081007;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}.menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem}
-    .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:132px 0 48px;background:linear-gradient(90deg, rgba(7,9,11,.9) 0%, rgba(7,9,11,.65) 42%, rgba(7,9,11,.18) 100%), url('./assets/hermes-portada3.jpg') center top/cover no-repeat}
-    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:end;width:100%}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(199,255,59,.24);background:rgba(199,255,59,.08);color:var(--accent);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,11vw,8.5rem);line-height:.88;letter-spacing:.04em;max-width:8ch;margin-bottom:16px}.hero p{max-width:62ch;color:#d6dee2;font-size:1.1rem;line-height:1.7;margin-bottom:28px}.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:18px;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;transition:.28s ease}.btn-primary{background:var(--accent);color:#0a1108;box-shadow:0 18px 45px rgba(199,255,59,.18)}.btn-primary:hover{transform:translateY(-3px)}.btn-secondary{border:1px solid var(--line);color:#fff;background:rgba(255,255,255,.03)}
-    .hero-panel{padding:24px;border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(180deg, rgba(10,14,17,.92), rgba(13,18,22,.72));backdrop-filter:blur(16px);box-shadow:var(--shadow)} .hero-panel-top{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}.hero-stat strong{display:block;font-family:'Bebas Neue';font-size:2.1rem;letter-spacing:.04em;color:var(--accent)}.hero-stat span{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#b7c1c6}.panel-title{font-family:'Bebas Neue';font-size:2rem;letter-spacing:.08em;margin-bottom:10px}.panel-copy{color:var(--muted);line-height:1.6;margin-bottom:18px}.check-list{display:grid;gap:12px}.check{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}.check i{color:var(--accent);font-size:1.1rem;margin-top:2px}
-    section{padding:100px 0}.section-header{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:32px}.section-header h2{font-family:'Bebas Neue';font-size:clamp(2.7rem,5vw,4.5rem);line-height:.92;letter-spacing:.06em}.section-header p{max-width:54ch;color:var(--muted);line-height:1.7}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(180deg, rgba(16,22,27,.92), rgba(11,14,18,.86));padding:26px;box-shadow:var(--shadow)}.about-card h3,.quiz-card h3,.coaching-card h3{font-family:'Bebas Neue';font-size:2.2rem;letter-spacing:.06em;margin-bottom:14px}.about-card p{color:#ced7dc;line-height:1.75;font-size:1.02rem}.about-media{margin-top:18px;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}.micro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.micro{padding:14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}.micro strong{display:block;font-family:'Bebas Neue';font-size:1.55rem;color:var(--accent)}.micro span{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:#b4bfc5}
-    .quiz-card .progress-head{display:flex;justify-content:space-between;color:#bfc8cc;font-size:.86rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:.12em}.progress{height:8px;background:#21282d;border-radius:999px;overflow:hidden;margin-bottom:18px}.progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7df16f);transition:.3s}.qar-option{display:block;cursor:pointer;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:14px 16px;margin-bottom:10px;background:rgba(255,255,255,.03);transition:.2s}.qar-option:hover{border-color:rgba(199,255,59,.35);transform:translateY(-1px)}.qar-input{width:100%;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:#fff;margin-bottom:10px;font-family:'Barlow',sans-serif}.btn-quiz{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#fff;cursor:pointer;font-weight:700;text-transform:uppercase;letter-spacing:.1em}.btn-quiz.btn-primary{background:var(--accent);border-color:var(--accent);color:#091008}
-    .plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.plan-card{border-radius:24px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));box-shadow:var(--shadow);display:flex;flex-direction:column}.plan-media{position:relative;aspect-ratio:1/1;overflow:hidden}.plan-media img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.plan-card:hover .plan-media img{transform:scale(1.05)}.plan-badge,.plan-new{position:absolute;top:14px;padding:7px 10px;border-radius:999px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;backdrop-filter:blur(10px)}.plan-badge{right:14px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1)}.plan-new{left:14px;background:var(--accent);color:#081107}.plan-info{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}.plan-info h3{font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:.05em}.plan-info p{color:var(--muted);line-height:1.55;font-size:.96rem;flex:1}.plan-price{font-family:'Bebas Neue';font-size:2.2rem;color:var(--accent);letter-spacing:.04em}
-    .coaching-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.coaching-card{position:relative;overflow:hidden}.coaching-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(199,255,59,.10), transparent 35%, transparent 70%, rgba(255,114,92,.08));pointer-events:none}.alert{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,114,92,.12);border:1px solid rgba(255,114,92,.24);color:#ffd1c8;font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;margin-bottom:18px}.coaching-price{font-family:'Bebas Neue';font-size:4rem;color:var(--accent);line-height:.9;margin:12px 0 18px}.feature-list{display:grid;gap:12px;margin-bottom:22px}.feature-list div{display:flex;gap:12px;align-items:flex-start;color:#d1d9de}.feature-list i{color:var(--accent);margin-top:2px}.coaching-side{display:grid;gap:16px}.side-card{padding:22px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.03)}.side-card h4{font-family:'Bebas Neue';font-size:1.65rem;letter-spacing:.05em;margin-bottom:8px}.side-card p{color:var(--muted);line-height:1.65}
-    .testimonials{overflow:hidden}.carousel-shell{position:relative}.carousel-shell::before,.carousel-shell::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}.carousel-shell::before{left:0;background:linear-gradient(90deg,#07090b,transparent)}.carousel-shell::after{right:0;background:linear-gradient(270deg,#07090b,transparent)}.carousel-track{display:flex;gap:18px;width:max-content;animation:marquee 40s linear infinite}.testimonial-card{width:280px;flex-shrink:0;border-radius:24px;border:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.03)}.testimonial-card img{aspect-ratio:4/5;object-fit:cover;width:100%}.testimonial-info{padding:16px}.testimonial-info strong{display:block;font-family:'Bebas Neue';font-size:1.5rem;letter-spacing:.06em}.stars{color:var(--accent);font-size:.8rem;letter-spacing:.2em;margin-top:4px}@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    footer{padding:36px 0 50px;color:#7d8b92;border-top:1px solid rgba(255,255,255,.06);text-align:center}.reveal{opacity:0;transform:translateY(32px);transition:all .8s ease}.reveal.active{opacity:1;transform:translateY(0)}
-    @media (max-width:1100px){.hero-grid,.about-grid,.coaching-wrap,.plans-grid{grid-template-columns:1fr 1fr}.nav-links{gap:14px}}
-    @media (max-width:820px){.menu-toggle{display:block}.nav-links{display:none;position:absolute;left:0;right:0;top:calc(100% + 10px);padding:18px;border-radius:22px;background:rgba(9,12,15,.96);border:1px solid var(--line);flex-direction:column}.nav-links.open{display:flex}.nav-cta{display:none}.hero{padding-top:120px}.hero-grid,.about-grid,.coaching-wrap,.plans-grid{grid-template-columns:1fr}.section-header{flex-direction:column;align-items:flex-start}}
-    @media (max-width:560px){.container{width:min(100% - 20px,1240px)}.navbar{width:calc(100% - 20px);top:10px}.hero h1{max-width:none}.hero-actions{flex-direction:column}.micro-grid{grid-template-columns:1fr}.testimonial-card{width:240px}}
-  </style>
+  <link rel="stylesheet" href="./assets/site.css">
 </head>
 <body>
-  <header class="navbar">
-    <a href="#home" class="brand"><div class="brand-mark"><img src="./assets/logo.png" alt="Logo"></div><div class="brand-text"><strong>Hermes Onori</strong><span>Worldwide coaching</span></div></a>
-    <button class="menu-toggle" id="menuToggle"><i class="ri-menu-3-line"></i></button>
-    <nav><ul class="nav-links" id="navLinks"><li><a href="#home">Home</a></li><li><a href="#about-me">About</a></li><li><a href="#plans">Plans</a></li><li><a href="#coaching">Coaching</a></li><li><a href="#testimonies">Results</a></li></ul></nav>
-    <a href="#plans" class="nav-cta">View plans</a>
-  </header>
+  <div class="page-shell">
+    <header class="navbar">
+      <a href="#home" class="brand">
+        <div class="brand-mark"><img src="./assets/logo.png" alt="Logo"></div>
+        <div class="brand-copy"><strong>Hermes Onori</strong><span>Worldwide coaching</span></div>
+      </a>
+      <button class="menu-toggle" id="menuToggle"><i class="ri-menu-3-line"></i></button>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about-me">About</a></li>
+          <li><a href="#plans">Plans</a></li>
+          <li><a href="#coaching">Coaching</a></li>
+          <li><a href="#testimonies">Results</a></li>
+        </ul>
+      </nav>
+      <a href="#plans" class="nav-cta">View plans</a>
+    </header>
 
-  <main id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="reveal">
-        <div class="eyebrow"><i class="ri-flashlight-line"></i> Elite physique & performance</div>
-        <h1>Build a body that looks earned.</h1>
-        <p>Coaching for definition, muscle gain and athletic performance. Structured programming, clear direction and a training system built to produce visible results.</p>
-        <div class="hero-actions"><a href="#plans" class="btn btn-primary">Start now</a><a href="#coaching" class="btn btn-secondary">See 1:1 coaching</a></div>
+    <main id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><i class="ri-flashlight-line"></i> Elite physique & performance</div>
+          <h1 class="hero-title">Build a body that looks earned.</h1>
+          <p class="hero-text">Coaching for definition, muscle gain and athletic performance. Structured programming, clear direction and a training system built to produce visible results.</p>
+          <div class="hero-actions">
+            <a href="#plans" class="btn btn-primary">Start now</a>
+            <a href="#coaching" class="btn btn-secondary">See 1:1 coaching</a>
+          </div>
+        </div>
+        <aside class="panel hero-panel reveal">
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>15+</strong><span>Years of experience</span></div>
+            <div class="hero-stat"><strong>1:1</strong><span>Direct support</span></div>
+            <div class="hero-stat"><strong>4</strong><span>Core programs</span></div>
+          </div>
+          <div class="panel-title">The Hermes method</div>
+          <p class="panel-copy" style="margin-top:8px;margin-bottom:18px;">A mix of competitive experience, technical thinking and practical coaching to turn goals into a system that fits your body, context and timeline.</p>
+          <div class="check-list">
+            <div class="check-item"><i class="ri-checkbox-circle-fill"></i><p><strong>Clear objective</strong><br><span style="color:var(--muted)">Definition, size or performance.</span></p></div>
+            <div class="check-item"><i class="ri-checkbox-circle-fill"></i><p><strong>Applicable plan</strong><br><span style="color:var(--muted)">Matched to your level and lifestyle.</span></p></div>
+            <div class="check-item"><i class="ri-checkbox-circle-fill"></i><p><strong>Focused progress</strong><br><span style="color:var(--muted)">Better adjustments and better consistency.</span></p></div>
+          </div>
+        </aside>
       </div>
-      <aside class="hero-panel reveal">
-        <div class="hero-panel-top"><div class="hero-stat"><strong>15+</strong><span>Years of experience</span></div><div class="hero-stat"><strong>1:1</strong><span>Direct support</span></div><div class="hero-stat"><strong>4</strong><span>Core programs</span></div></div>
-        <div class="panel-title">The Hermes method</div>
-        <p class="panel-copy">A mix of competitive experience, technical thinking and practical coaching to turn goals into a system that fits your body, context and timeline.</p>
-        <div class="check-list"><div class="check"><i class="ri-checkbox-circle-fill"></i><div><strong>Clear objective</strong><br><span style="color:var(--muted)">Definition, size or performance.</span></div></div><div class="check"><i class="ri-checkbox-circle-fill"></i><div><strong>Applicable plan</strong><br><span style="color:var(--muted)">Matched to your level and lifestyle.</span></div></div><div class="check"><i class="ri-checkbox-circle-fill"></i><div><strong>Focused progress</strong><br><span style="color:var(--muted)">Better adjustments, better consistency, better results.</span></div></div></div>
-      </aside>
-    </div>
-  </main>
+    </main>
 
-  <section id="about-me">
-    <div class="container">
-      <div class="section-header reveal"><h2>Train with direction,<br>not guesswork.</h2><p>Hermes Onori brings together personal training, engineering thinking and bodybuilding experience to create transformation systems with structure, intensity and purpose.</p></div>
-      <div class="about-grid">
-        <article class="card about-card reveal"><h3>About me</h3><p>I'm Hermes Onori — personal trainer, engineer and former bodybuilding competitor. For more than 15 years I've helped people improve body composition, performance and training consistency through systems that are demanding, realistic and sustainable.</p><div class="micro-grid"><div class="micro"><strong>15+</strong><span>Years coaching</span></div><div class="micro"><strong>3</strong><span>Main goals</span></div><div class="micro"><strong>1</strong><span>Focused method</span></div></div></article>
-        <article class="card quiz-card reveal"><h3>Find your plan</h3><div class="progress-head"><span>Step <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span></div><div class="progress"><div id="qar-bar"></div></div><div id="qar-wrap"></div></article>
+    <section id="about-me" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Train with direction,<br>not guesswork.</h2>
+          <p class="section-copy">Hermes Onori brings together personal training, engineering thinking and bodybuilding experience to create transformation systems with structure, intensity and purpose.</p>
+        </div>
+        <div class="about-grid">
+          <article class="card reveal">
+            <h3 class="card-title">About me</h3>
+            <p class="card-copy" style="margin-top:12px;">I'm Hermes Onori — personal trainer, engineer and former bodybuilding competitor. For more than 15 years I've helped people improve body composition, performance and training consistency through systems that are demanding, realistic and sustainable.</p>
+            <div class="micro-grid">
+              <div class="micro-item"><strong>15+</strong><span>Years coaching</span></div>
+              <div class="micro-item"><strong>3</strong><span>Main goals</span></div>
+              <div class="micro-item"><strong>1</strong><span>Focused method</span></div>
+            </div>
+          </article>
+          <article class="card reveal">
+            <h3 class="card-title">Find your plan</h3>
+            <div class="quiz-head"><span>Step <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span></div>
+            <div class="progress"><div id="qar-bar"></div></div>
+            <div id="qar-wrap"></div>
+          </article>
+        </div>
+        <div class="media-frame reveal"><img src="./assets/Portada_final.webp" alt="Hermes Onori"></div>
       </div>
-      <div class="about-media reveal"><img src="./assets/Portada_final.webp" alt="Hermes Onori"></div>
-    </div>
-  </section>
+    </section>
 
-  <section id="plans">
-    <div class="container">
-      <div class="section-header reveal"><h2>Programs built for<br>specific outcomes.</h2><p>Each plan has a different training logic. Pick the one that best matches your objective, preferred training style and desired result.</p></div>
-      <div class="plans-grid">
-        <article class="plan-card reveal"><a href="https://hermesonori.gumroad.com/l/VERANO" class="plan-media" target="_blank"><span class="plan-new">New</span><span class="plan-badge">3, 4 or 5 gym days</span><img src="./programas/VERANO.webp" alt="Summer Challenge"></a><div class="plan-info"><h3>Summer Challenge</h3><p>Balanced approach to definition and muscle mass. Great for a leaner, sharper and more athletic look.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/VERANO" target="_blank" class="btn btn-primary">Buy now</a></div></article>
-        <article class="plan-card reveal"><a href="https://hermesonori.gumroad.com/l/HYBRID-ATHLETE" class="plan-media" target="_blank"><span class="plan-badge">5 gym days + functional</span><img src="./programas/HYBRID.webp" alt="Hybrid Athlete"></a><div class="plan-info"><h3>Hybrid Athlete</h3><p>For better athletic condition, stronger musculature and a more complete performance base.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/HYBRID-ATHLETE" target="_blank" class="btn btn-primary">Buy now</a></div></article>
-        <article class="plan-card reveal"><a href="https://hermesonori.gumroad.com/l/MOVIE-STAR" class="plan-media" target="_blank"><span class="plan-badge">Dynamic circuits</span><img src="./programas/MOVIESTAR1.webp" alt="Movie Star"></a><div class="plan-info"><h3>Movie Star</h3><p>Built for muscle tone, visual definition and a more cinematic physique through intense circuit work.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/MOVIE-STAR" target="_blank" class="btn btn-primary">Buy now</a></div></article>
-        <article class="plan-card reveal"><a href="https://hermesonori.gumroad.com/l/BODY-BUILDER" class="plan-media" target="_blank"><span class="plan-badge">5 gym days</span><img src="./programas/BODYB1.webp" alt="Body Builder"></a><div class="plan-info"><h3>Body-Builder</h3><p>Focused on strength, density and muscular size for people who want to build a bigger frame.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/BODY-BUILDER" target="_blank" class="btn btn-primary">Buy now</a></div></article>
+    <section id="plans" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Programs built for<br>specific outcomes.</h2>
+          <p class="section-copy">Each plan has a different training logic. Pick the one that best matches your objective, preferred training style and desired result.</p>
+        </div>
+        <div class="plan-grid">
+          <article class="plan-card reveal">
+            <a href="https://hermesonori.gumroad.com/l/VERANO" class="plan-media" target="_blank"><span class="plan-new">New</span><span class="plan-badge">3, 4 or 5 gym days</span><img src="./programas/VERANO.webp" alt="Summer Challenge"></a>
+            <div class="plan-info"><h3 class="plan-title">Summer Challenge</h3><p class="plan-copy">Balanced approach to definition and muscle mass. Great for a leaner, sharper and more athletic look.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/VERANO" target="_blank" class="btn btn-primary">Buy now</a></div>
+          </article>
+          <article class="plan-card reveal">
+            <a href="https://hermesonori.gumroad.com/l/HYBRID-ATHLETE" class="plan-media" target="_blank"><span class="plan-badge">5 gym days + functional</span><img src="./programas/HYBRID.webp" alt="Hybrid Athlete"></a>
+            <div class="plan-info"><h3 class="plan-title">Hybrid Athlete</h3><p class="plan-copy">For better athletic condition, stronger musculature and a more complete performance base.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/HYBRID-ATHLETE" target="_blank" class="btn btn-primary">Buy now</a></div>
+          </article>
+          <article class="plan-card reveal">
+            <a href="https://hermesonori.gumroad.com/l/MOVIE-STAR" class="plan-media" target="_blank"><span class="plan-badge">Dynamic circuits</span><img src="./programas/MOVIESTAR1.webp" alt="Movie Star"></a>
+            <div class="plan-info"><h3 class="plan-title">Movie Star</h3><p class="plan-copy">Built for muscle tone, visual definition and a more cinematic physique through intense circuit work.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/MOVIE-STAR" target="_blank" class="btn btn-primary">Buy now</a></div>
+          </article>
+          <article class="plan-card reveal">
+            <a href="https://hermesonori.gumroad.com/l/BODY-BUILDER" class="plan-media" target="_blank"><span class="plan-badge">5 gym days</span><img src="./programas/BODYB1.webp" alt="Body Builder"></a>
+            <div class="plan-info"><h3 class="plan-title">Body-Builder</h3><p class="plan-copy">Focused on strength, density and muscular size for people who want to build a bigger frame.</p><div class="plan-price">59 USD</div><a href="https://hermesonori.gumroad.com/l/BODY-BUILDER" target="_blank" class="btn btn-primary">Buy now</a></div>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="coaching">
-    <div class="container coaching-wrap">
-      <article class="card coaching-card reveal"><div class="alert"><i class="ri-fire-fill"></i> 1 spot available</div><h3>1:1 coaching — 3 months</h3><p style="color:#d2dbe0;line-height:1.75;max-width:58ch">For people who want a more serious process: individual analysis, direct contact and a strategy built around current condition, goals and execution quality.</p><div class="coaching-price">699 USD</div><div class="feature-list"><div><i class="ri-checkbox-circle-fill"></i><span>Introductory Google Meet interview</span></div><div><i class="ri-checkbox-circle-fill"></i><span>Direct contact through WhatsApp</span></div><div><i class="ri-checkbox-circle-fill"></i><span>Personalized training blocks</span></div><div><i class="ri-checkbox-circle-fill"></i><span>Nutritional & supplementation guidance</span></div><div><i class="ri-checkbox-circle-fill"></i><span>Monthly updates and follow-up</span></div></div><a href="coaching.html" class="btn btn-primary">Start coaching</a></article>
-      <div class="coaching-side"><article class="side-card reveal"><h4>Who this is for</h4><p>People who want to reduce trial and error and move forward with structure, accountability and clearer decision-making.</p></article><article class="side-card reveal"><h4>What changes</h4><p>You are not buying a random routine. You enter a coached process with priorities, feedback and a more intelligent path to progress.</p></article></div>
-    </div>
-  </section>
+    <section id="coaching" class="section">
+      <div class="container coaching-grid">
+        <article class="card reveal">
+          <div class="alert"><i class="ri-fire-fill"></i> 1 spot available</div>
+          <h3 class="card-title">1:1 coaching — 3 months</h3>
+          <p class="card-copy" style="margin-top:12px;max-width:58ch;">For people who want a more serious process: individual analysis, direct contact and a strategy built around current condition, goals and execution quality.</p>
+          <div class="price-wrap"><div class="price-main">699 USD</div><div class="price-sub">Full access</div></div>
+          <div class="feature-list">
+            <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Introductory Google Meet interview</p></div>
+            <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Direct contact through WhatsApp</p></div>
+            <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Personalized training blocks</p></div>
+            <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Nutritional & supplementation guidance</p></div>
+            <div class="feature"><i class="ri-checkbox-circle-fill"></i><p>Monthly updates and follow-up</p></div>
+          </div>
+          <a href="coaching.html" class="btn btn-primary">Start coaching</a>
+        </article>
+        <div class="side-stack reveal">
+          <article class="side-card"><h3 class="side-title">Who this is for</h3><p class="side-copy" style="margin-top:8px;">People who want to reduce trial and error and move forward with structure, accountability and clearer decision-making.</p></article>
+          <article class="side-card"><h3 class="side-title">What changes</h3><p class="side-copy" style="margin-top:8px;">You are not buying a random routine. You enter a coached process with priorities, feedback and a more intelligent path to progress.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <section id="testimonies" class="testimonials">
-    <div class="container">
-      <div class="section-header reveal"><h2>Visible results.<br>Real adherence.</h2><p>Physical transformations built through better programming, consistency and a method that keeps the process moving.</p></div>
-      <div class="carousel-shell reveal"><div class="carousel-track">
-        <article class="testimonial-card"><img src="./cambios/cambio2.png" alt="Ignacio"><div class="testimonial-info"><strong>Ignacio</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio3.png" alt="Hermes"><div class="testimonial-info"><strong>Hermes</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio4.png" alt="Emi"><div class="testimonial-info"><strong>Emi</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio5.png" alt="Valentino"><div class="testimonial-info"><strong>Valentino</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio6.webp" alt="Franco"><div class="testimonial-info"><strong>Franco</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio7.webp" alt="Marco"><div class="testimonial-info"><strong>Marco</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio8.webp" alt="Arturo"><div class="testimonial-info"><strong>Arturo</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio9.webp" alt="Diego"><div class="testimonial-info"><strong>Diego</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio10.webp" alt="Juan"><div class="testimonial-info"><strong>Juan</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio2.png" alt="Ignacio"><div class="testimonial-info"><strong>Ignacio</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio3.png" alt="Hermes"><div class="testimonial-info"><strong>Hermes</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio4.png" alt="Emi"><div class="testimonial-info"><strong>Emi</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio5.png" alt="Valentino"><div class="testimonial-info"><strong>Valentino</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio6.webp" alt="Franco"><div class="testimonial-info"><strong>Franco</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio7.webp" alt="Marco"><div class="testimonial-info"><strong>Marco</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio8.webp" alt="Arturo"><div class="testimonial-info"><strong>Arturo</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio9.webp" alt="Diego"><div class="testimonial-info"><strong>Diego</strong><div class="stars">★★★★★</div></div></article>
-        <article class="testimonial-card"><img src="./cambios/cambio10.webp" alt="Juan"><div class="testimonial-info"><strong>Juan</strong><div class="stars">★★★★★</div></div></article>
-      </div></div>
-    </div>
-  </section>
+    <section id="testimonies" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Visible results.<br>Real adherence.</h2>
+          <p class="section-copy">Physical transformations built through better programming, consistency and a method that keeps the process moving.</p>
+        </div>
+        <div class="carousel-shell reveal">
+          <div class="carousel-track">
+            <article class="testimonial-card"><img src="./cambios/cambio2.png" alt="Ignacio"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Ignacio</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio3.png" alt="Hermes"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Hermes</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio4.png" alt="Emi"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Emi</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio5.png" alt="Valentino"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Valentino</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio6.webp" alt="Franco"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Franco</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio7.webp" alt="Marco"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Marco</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio8.webp" alt="Arturo"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Arturo</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio9.webp" alt="Diego"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Diego</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio10.webp" alt="Juan"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Juan</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio2.png" alt="Ignacio"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Ignacio</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio3.png" alt="Hermes"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Hermes</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio4.png" alt="Emi"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Emi</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio5.png" alt="Valentino"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Valentino</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio6.webp" alt="Franco"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Franco</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio7.webp" alt="Marco"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Marco</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio8.webp" alt="Arturo"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Arturo</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio9.webp" alt="Diego"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Diego</h3><div class="stars">★★★★★</div></div></article>
+            <article class="testimonial-card"><img src="./cambios/cambio10.webp" alt="Juan"><div class="testimonial-info"><h3 class="plan-title" style="font-size:1.7rem;">Juan</h3><div class="stars">★★★★★</div></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer>Hermes Onori · Worldwide coaching · All rights reserved</footer>
+    <footer class="footer">Hermes Onori · Worldwide coaching · All rights reserved</footer>
+  </div>
 
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -152,14 +203,12 @@
           { id:'height', placeholder:'Height (cm)' }
         ]}
       ];
-
       const PLANS = {
         VERANO: { title:'Summer Challenge', img:'./programas/VERANO.webp', url:'https://hermesonori.gumroad.com/l/VERANO' },
         HYBRID: { title:'Hybrid Athlete', img:'./programas/HYBRID.webp', url:'https://hermesonori.gumroad.com/l/HYBRID-ATHLETE' },
         MOVIESTAR: { title:'Movie Star', img:'./programas/MOVIESTAR1.webp', url:'https://hermesonori.gumroad.com/l/MOVIE-STAR' },
         BODYBUILDER: { title:'Body-Builder', img:'./programas/BODYB1.webp', url:'https://hermesonori.gumroad.com/l/BODY-BUILDER' }
       };
-
       function rankPlans(a){
         const s={VERANO:0,HYBRID:0,BODYBUILDER:0,MOVIESTAR:0};
         if(a.goal==='beach_body'){ s.MOVIESTAR++; s.VERANO++; }
@@ -171,7 +220,6 @@
         const p={VERANO:4,HYBRID:3,BODYBUILDER:2,MOVIESTAR:1};
         return Object.entries(s).sort((a,b)=>(b[1]-a[1])||(p[b[0]]-p[a[0]])).map(([k])=>k);
       }
-
       let step = 0; const ans = {}; const wrap = document.getElementById('qar-wrap');
       function renderStep(){
         if(step < QUESTIONS.length){
@@ -180,19 +228,22 @@
           document.getElementById('qar-step').textContent = step + 1;
           document.getElementById('qar-pct').textContent = pct + '%';
           document.getElementById('qar-bar').style.width = pct + '%';
-          let h = `<h4 style="font-size:1.08rem;margin-bottom:14px;font-weight:700;line-height:1.5;">${q.label}</h4>`;
-          if(q.options){ h += q.options.map(o => `<label class="qar-option"><input type="radio" name="q" value="${o.value}" style="margin-right:8px"> ${o.label}</label>`).join(''); }
-          else { h += q.fields.map(f => `<input id="${f.id}" placeholder="${f.placeholder}" class="qar-input">`).join(''); }
-          h += `<div style="display:flex;gap:10px;margin-top:14px;"><button class="btn-quiz" id="btnBack" ${step===0?'style="display:none"':''}>Back</button><button class="btn-quiz btn-primary" id="btnNext" style="flex:1">${step===QUESTIONS.length-1?'See result':'Next'}</button></div>`;
+          let h = `<div class="quiz-question">${q.label}</div>`;
+          if(q.options){ h += q.options.map(o => `<label class="quiz-option"><input type="radio" name="q" value="${o.value}" style="margin-right:8px"> ${o.label}</label>`).join(''); }
+          else { h += q.fields.map(f => `<input id="${f.id}" placeholder="${f.placeholder}" class="quiz-input">`).join(''); }
+          h += `<div class="quiz-actions"><button class="quiz-btn" id="btnBack" ${step===0?'style="display:none"':''}>Back</button><button class="quiz-btn quiz-btn-primary" id="btnNext">${step===QUESTIONS.length-1?'See result':'Next'}</button></div>`;
           wrap.innerHTML = h;
-          document.getElementById('btnNext').onclick = () => { if(q.options){ const chosen = wrap.querySelector('input[name="q"]:checked'); if(!chosen) return alert('Please choose an option'); ans[q.key] = chosen.value; } step++; renderStep(); };
+          document.getElementById('btnNext').onclick = () => {
+            if(q.options){ const chosen = wrap.querySelector('input[name="q"]:checked'); if(!chosen) return alert('Please choose an option'); ans[q.key] = chosen.value; }
+            step++; renderStep();
+          };
           if(step > 0) document.getElementById('btnBack').onclick = () => { step--; renderStep(); };
         } else {
-          const order = rankPlans(ans); const p = PLANS[order[0]];
+          const p = PLANS[rankPlans(ans)[0]];
           document.getElementById('qar-step').textContent = QUESTIONS.length;
           document.getElementById('qar-pct').textContent = '100%';
           document.getElementById('qar-bar').style.width = '100%';
-          wrap.innerHTML = `<div style="text-align:center"><h4 style="font-family:'Bebas Neue';font-size:2rem;letter-spacing:.06em;color:var(--accent);margin-bottom:8px">${p.title}</h4><p style="color:var(--muted);margin-bottom:16px">This is the plan that best matches your goals.</p><img src="${p.img}" style="border-radius:18px;border:1px solid rgba(255,255,255,.08);margin-bottom:16px"><a href="${p.url}" class="btn btn-primary" target="_blank" style="width:100%">Start now</a><button onclick="window.resetQ()" style="margin-top:12px;background:none;border:none;color:#fff;text-decoration:underline;cursor:pointer">Retake quiz</button></div>`;
+          wrap.innerHTML = `<div class="result-card"><div class="result-title">${p.title}</div><p class="result-copy">This is the plan that best matches your goals.</p><img src="${p.img}" alt="${p.title}"><a href="${p.url}" target="_blank" class="btn btn-primary" style="width:100%">Start now</a><button onclick="window.resetQ()" style="margin-top:12px;background:none;border:none;color:#fff;text-decoration:underline;cursor:pointer">Retake quiz</button></div>`;
         }
       }
       window.resetQ = () => { step = 0; renderStep(); };
