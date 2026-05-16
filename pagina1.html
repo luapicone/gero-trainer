@@ -209,11 +209,10 @@
       display: grid;
       grid-template-columns: 1.05fr .95fr;
       gap: 34px;
-      align-items: start;
+      align-items: stretch;
     }
     .about-visual {
-      min-height: 500px;
-      margin-top: 28px;
+      min-height: 520px;
       border-radius: 30px;
       border: 1px solid rgba(255,255,255,.08);
       background:
@@ -235,7 +234,8 @@
     }
     .about-points i { color: var(--accent); margin-top: 2px; }
     .quiz-panel {
-      padding: 24px;
+      margin-top: 34px;
+      padding: 26px;
       border-radius: 28px;
       border: 1px solid rgba(255,255,255,.08);
       background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
@@ -569,15 +569,15 @@
             <div><i class="ri-checkbox-circle-fill"></i><p>Coaching con seguimiento real para sostener el cambio.</p></div>
           </div>
         </div>
-        <div class="quiz-panel reveal">
-          <h3>Encontrá tu plan</h3>
-          <p class="copy" style="margin-top:8px;">Respondé estas preguntas y te marco el programa más alineado con tu objetivo.</p>
-          <div class="quiz-head"><span>Paso <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span></div>
-          <div class="progress"><div id="qar-bar"></div></div>
-          <div id="qar-wrap"></div>
-        </div>
+        <div class="about-visual reveal"></div>
       </div>
-      <div class="about-visual reveal"></div>
+      <div class="quiz-panel reveal">
+        <h3>Encontrá tu plan</h3>
+        <p class="copy" style="margin-top:8px;max-width:56ch;">Respondé estas preguntas y te marco el programa más alineado con tu objetivo.</p>
+        <div class="quiz-head"><span>Paso <span id="qar-step">1</span>/5</span><span id="qar-pct">0%</span></div>
+        <div class="progress"><div id="qar-bar"></div></div>
+        <div id="qar-wrap"></div>
+      </div>
     </div>
   </section>
 
