@@ -3,178 +3,346 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hermes Onori - Fitness Coach</title>
+  <title>Hermes Onori — Performance Coaching</title>
   <link rel="icon" type="image/x-icon" href="./assets/logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    :root {
+      --bg: #090b0d;
+      --panel: rgba(12, 16, 20, 0.78);
+      --panel-strong: rgba(17, 22, 27, 0.94);
+      --text: #eef2f4;
+      --muted: #95a1a8;
+      --line: rgba(255,255,255,.08);
+      --accent: #c7ff3b;
+      --accent-2: #7ddf64;
+      --shadow: 0 40px 120px rgba(0,0,0,.45);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: #1c1c1c;
-      font-family: 'Inter', sans-serif;
-      color: #fff;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(199,255,59,.12), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(125,223,100,.10), transparent 24%),
+        linear-gradient(180deg, #0d1115 0%, #090b0d 55%, #050607 100%);
+      overflow: hidden;
     }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      text-align: center;
-      padding: 80px 20px 40px;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+      opacity: .22;
+      pointer-events: none;
+    }
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
       position: relative;
-      animation: fadeInUp 1s ease-out;
     }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(5,7,8,.18), rgba(5,7,8,.62)),
+        url('./assets/hermes-portada3.jpg') center top / cover;
     }
-
-    .logo-container {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 20px;
-      animation: spin 20s linear infinite;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
+    .visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
     }
-
-    .logo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .title-main {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .title-sub {
-      font-size: 1.1rem;
-      color: #aaa;
-      margin-bottom: 40px;
-    }
-
-    .buttons {
+    .badge-strip {
+      position: absolute;
+      left: 32px;
+      top: 28px;
+      z-index: 2;
       display: flex;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 20px;
     }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 28px;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
+    .badge {
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(5,8,10,.52);
+      backdrop-filter: blur(12px);
       border-radius: 999px;
-      cursor: pointer;
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #d8e5ea;
+    }
+    .hero-note {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      z-index: 2;
+      width: min(420px, calc(100% - 64px));
+      padding: 22px 22px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(7,10,12,.62);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+    .hero-note p {
+      color: #d7e0e4;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .hero-note strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .panel {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px;
+    }
+    .panel-inner {
+      width: min(620px, 100%);
+      padding: 34px;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,19,23,.96), rgba(9,12,15,.92));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(199,255,59,.10), transparent 24%, transparent 72%, rgba(125,223,100,.08));
+      pointer-events: none;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.08);
+      background: radial-gradient(circle at 30% 30%, rgba(199,255,59,.18), rgba(255,255,255,.02));
+      box-shadow: inset 0 0 24px rgba(255,255,255,.04);
+    }
+    .brand-mark img {
+      width: 76%;
+      height: 76%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: .92;
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .kicker {
+      font-size: .78rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 7rem);
+      line-height: .92;
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+    }
+    .sub {
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 46ch;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    .stat {
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.03);
+    }
+    .stat strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .05em;
+      font-size: 1.9rem;
+      color: var(--accent);
+    }
+    .stat span {
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #a7b4bb;
+    }
+    .options {
+      display: grid;
+      gap: 14px;
+    }
+    .option {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 16px;
       text-decoration: none;
-      transition: all 0.3s ease;
-      color: #000;
+      padding: 18px 18px 18px 20px;
+      border-radius: 24px;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      transition: transform .28s ease, border-color .28s ease, background .28s ease, box-shadow .28s ease;
     }
-
-    .button.arg {
-      background: linear-gradient(to right, #ffffff, #cbe8ff);
-      color: #000;
+    .option:hover {
+      transform: translateY(-4px);
+      border-color: rgba(199,255,59,.42);
+      box-shadow: 0 24px 60px rgba(0,0,0,.28);
+      background: linear-gradient(180deg, rgba(199,255,59,.10), rgba(255,255,255,.03));
     }
-
-    .button.arg:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(to right, #f5fbff, #b8dbf9);
+    .option-flag {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
     }
-
-    .button.world {
-      background: linear-gradient(to right, #003366, #007bff);
-      color: #fff;
+    .option h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .06em;
+      margin-bottom: 2px;
     }
-
-    .button.world:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(to right, #002244, #0066dd);
+    .option p {
+      color: #a8b3b8;
+      font-size: .96rem;
+      line-height: 1.45;
     }
-
-    .subtitle {
-      margin-top: 25px;
-      font-size: 0.95rem;
-      color: #fff;
-      letter-spacing: 0.5px;
+    .arrow {
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .footer-note {
+      margin-top: 20px;
+      color: #849198;
+      font-size: .92rem;
       line-height: 1.5;
-      font-weight: 400;
-      transition: color 0.3s ease;
     }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #666;
-      background-color: #111;
+    @media (max-width: 980px) {
+      body { overflow: auto; }
+      .shell { grid-template-columns: 1fr; }
+      .visual { min-height: 46vh; }
+      .panel { margin-top: -48px; padding-top: 0; }
     }
-
-    @media (max-width: 768px) {
-      .title-main { font-size: 1.6rem; }
-      .title-sub { font-size: 1rem; }
-      .buttons { flex-direction: column; gap: 12px; }
-      .button { font-size: 0.95rem; padding: 10px 22px; }
-      .logo-container { width: 60px; height: 60px; }
+    @media (max-width: 640px) {
+      .panel { padding: 16px; }
+      .panel-inner { padding: 22px; border-radius: 26px; }
+      .brand { gap: 12px; margin-bottom: 22px; }
+      .brand-mark { width: 60px; height: 60px; border-radius: 18px; }
+      .stats { grid-template-columns: 1fr; }
+      .option { grid-template-columns: auto 1fr; }
+      .arrow { display: none; }
+      .hero-note { left: 16px; right: 16px; width: auto; bottom: 16px; }
+      .badge-strip { left: 16px; top: 16px; right: 16px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo-container">
-      <img src="./assets/triskel.png" alt="Triskel Celta">
-    </div>
+  <div class="shell">
+    <section class="visual">
+      <div class="badge-strip">
+        <div class="badge">15+ años de experiencia</div>
+        <div class="badge">Fuerza · estética · performance</div>
+      </div>
+      <div class="hero-note">
+        <p><strong>Entrenamiento con criterio.</strong> Programas diseñados para cambiar composición corporal, construir músculo y sostener resultados con estructura real.</p>
+      </div>
+    </section>
 
-    <div class="title-main">Hermes Onori</div>
-    <div class="title-sub">Fitness Coach</div>
+    <section class="panel">
+      <div class="panel-inner">
+        <div class="brand">
+          <div class="brand-mark"><img src="./assets/triskel.png" alt="Triskel"></div>
+          <div>
+            <div class="kicker">Performance coaching</div>
+            <div style="color:#cbd5da; letter-spacing:.16em; text-transform:uppercase; font-size:.78rem;">Argentina · Worldwide</div>
+          </div>
+        </div>
 
-    <div class="buttons">
-      <a href="pagina1.html" class="button arg">🇦🇷 ARGENTINA</a>
-      <a href="pagina2.html" class="button world">🌍 WORLDWIDE</a>
-    </div>
+        <h1>Hermes Onori</h1>
+        <p class="sub" id="tagline">Tu transformación física no necesita ruido: necesita dirección, método y constancia.</p>
 
-    <p class="subtitle" id="tagline">Tu cambio empieza hoy.</p>
+        <div class="stats">
+          <div class="stat"><strong>15+</strong><span>Años guiando procesos</span></div>
+          <div class="stat"><strong>1:1</strong><span>Seguimiento enfocado</span></div>
+          <div class="stat"><strong>4</strong><span>Programas base</span></div>
+        </div>
+
+        <div class="options">
+          <a href="pagina1.html" class="option">
+            <div class="option-flag">🇦🇷</div>
+            <div>
+              <h2>Argentina</h2>
+              <p>Programas, coaching y compra en pesos para público local.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a href="pagina2.html" class="option">
+            <div class="option-flag">🌍</div>
+            <div>
+              <h2>Worldwide</h2>
+              <p>International version with plans, 1:1 coaching and global checkout flow.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+        </div>
+
+        <p class="footer-note">Elegí tu versión y entrá a un ecosistema pensado para definición, masa muscular, performance y cambios físicos sostenibles.</p>
+      </div>
+    </section>
   </div>
 
-  <footer>
-    Hermes Onori – Todos los derechos reservados
-  </footer>
-
   <script>
-    // Detecta idioma y país usando la localización del navegador
-    const tagline = document.getElementById("tagline");
+    const tagline = document.getElementById('tagline');
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => {
-        if (data.country_code === "AR") {
-          tagline.textContent = "Tu cambio empieza hoy.";
-        } else {
-          tagline.textContent = "Your transformation starts today.";
-        }
+        tagline.textContent = data.country_code === 'AR'
+          ? 'Tu transformación física no necesita ruido: necesita dirección, método y constancia.'
+          : 'Real transformation is not built on hype. It is built on direction, method and consistency.';
       })
       .catch(() => {
-        // Fallback por defecto en inglés si no se puede detectar
-        tagline.textContent = "Your transformation starts today.";
+        tagline.textContent = 'Real transformation is not built on hype. It is built on direction, method and consistency.';
       });
   </script>
 </body>
