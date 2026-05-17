@@ -45,13 +45,14 @@
     img { display: block; max-width: 100%; }
     a { color: inherit; }
     .container { width: min(var(--container), calc(100% - 40px)); margin: 0 auto; }
+    .hero > .container { max-width: 1380px; }
 
     .nav {
       position: fixed;
       top: 18px;
       left: 50%;
       transform: translateX(-50%);
-      width: min(var(--container), calc(100% - 28px));
+      width: calc(100% - 24px);
       z-index: 1000;
       display: flex;
       align-items: center;
