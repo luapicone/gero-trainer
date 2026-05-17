@@ -136,10 +136,12 @@
         url('./assets/hermes-portada3.jpg') center top / cover no-repeat;
     }
     .hero-layout {
-      width: min(880px, 100%);
-      display: grid;
-      gap: 18px;
-      align-content: start;
+      width: min(900px, 100%);
+      min-height: calc(100vh - 180px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 40px;
     }
     .eyebrow {
       display: inline-flex;
@@ -157,12 +159,19 @@
       position: static;
       transform: none;
       margin: 0;
+      padding-top: 8px;
+    }
+    .hero-bottom {
+      display: grid;
+      gap: 18px;
+      align-content: end;
+      max-width: 760px;
     }
     .hero-copy {
-      max-width: 54ch;
+      max-width: 48ch;
       color: #d4dde1;
-      font-size: 1.02rem;
-      line-height: 1.75;
+      font-size: 1rem;
+      line-height: 1.72;
     }
     .hero-actions {
       display: flex;
@@ -483,6 +492,7 @@
       .section-head,
       .about-layout,
       .coaching-block { width: 100%; grid-template-columns: 1fr; }
+      .hero-layout { min-height: calc(100vh - 172px); }
       .programs-grid { grid-template-columns: 1fr; }
       .programs-head,
       .results-head { flex-direction: column; align-items: flex-start; }
@@ -550,15 +560,17 @@
           <div class="eyebrow"><i class="ri-flashlight-line"></i> Argentina</div>
           <h1><span class="hero-title-line">Menos ruido.</span><span class="hero-title-line">Más resultado.</span></h1>
         </div>
-        <p class="hero-copy">Programas de entrenamiento y coaching para construir un físico más atlético, más fuerte y más trabajado con una estructura seria.</p>
-        <div class="hero-actions">
-          <a href="#planes" class="btn btn-primary">Ver programas</a>
-          <a href="#coaching" class="btn btn-secondary">Coaching 1:1</a>
-        </div>
-        <div class="hero-metrics">
-          <div class="metric"><strong>15+</strong><span>Años de experiencia</span></div>
-          <div class="metric"><strong>4</strong><span>Programas base</span></div>
-          <div class="metric"><strong>1:1</strong><span>Seguimiento directo</span></div>
+        <div class="hero-bottom">
+          <p class="hero-copy">Programas de entrenamiento y coaching para construir un físico más atlético, más fuerte y más trabajado con una estructura seria.</p>
+          <div class="hero-actions">
+            <a href="#planes" class="btn btn-primary">Ver programas</a>
+            <a href="#coaching" class="btn btn-secondary">Coaching 1:1</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric"><strong>15+</strong><span>Años de experiencia</span></div>
+            <div class="metric"><strong>4</strong><span>Programas base</span></div>
+            <div class="metric"><strong>1:1</strong><span>Seguimiento directo</span></div>
+          </div>
         </div>
       </div>
     </div>
