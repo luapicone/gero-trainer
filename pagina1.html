@@ -143,12 +143,14 @@
       right: 0;
       width: 62%;
       height: 100%;
+      z-index: 0;
       background:
-        linear-gradient(to right, #0d1114 0%, rgba(13,17,20,.7) 18%, transparent 38%),
+        linear-gradient(to right, #0d1114 0%, #0d1114 12%, rgba(13,17,20,.8) 30%, rgba(13,17,20,.3) 46%, transparent 58%),
         url('./assets/hermes-portada3.jpg') center top / cover no-repeat;
     }
     .hero-layout {
       position: relative;
+      z-index: 1;
       width: 100%;
       min-height: calc(100vh - 180px);
       display: flex;
