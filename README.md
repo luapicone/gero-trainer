@@ -15,3 +15,10 @@ Landing estática multi-page para el universo de **Hermes Onori / personal train
 - `npm run dev`
 - `npm run build`
 - `npm run preview`
+
+## Power Automate
+
+Se agregó un paquete base en `power-automate/procedimiento-package/` para importar/usar como plantilla del flujo **Procedimiento**.
+
+- `power-automate/procedimiento-package/Procedimiento-import.zip` → paquete base
+- `power-automate/build_procedimiento_package.py` → regenera el zip si se editan los JSON

@@ -1,0 +1,365 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "$connections": {
+      "defaultValue": {},
+      "type": "Object"
+    },
+    "$authentication": {
+      "defaultValue": {},
+      "type": "SecureObject"
+    },
+    "sharepointSiteUrl": {
+      "type": "String",
+      "defaultValue": "__SHAREPOINT_SITE_URL__"
+    },
+    "sourceLibrary": {
+      "type": "String",
+      "defaultValue": "__SOURCE_LIBRARY__"
+    },
+    "sourceFolder": {
+      "type": "String",
+      "defaultValue": "__SOURCE_FOLDER__"
+    },
+    "configListName": {
+      "type": "String",
+      "defaultValue": "__CONFIG_LIST_NAME__"
+    },
+    "configFilterQuery": {
+      "type": "String",
+      "defaultValue": "__FILTER_QUERY__"
+    },
+    "reviewerField": {
+      "type": "String",
+      "defaultValue": "__REVIEWER_FIELD_INTERNAL_NAME__"
+    },
+    "approverField": {
+      "type": "String",
+      "defaultValue": "__APPROVER_FIELD_INTERNAL_NAME__"
+    },
+    "destinationPathField": {
+      "type": "String",
+      "defaultValue": "__DESTINATION_PATH_FIELD_INTERNAL_NAME__"
+    },
+    "notificationEmail": {
+      "type": "String",
+      "defaultValue": "__NOTIFICATION_EMAIL__"
+    }
+  },
+  "triggers": {
+    "When_a_file_is_created_or_modified_(properties_only)": {
+      "recurrence": {
+        "frequency": "Minute",
+        "interval": 3
+      },
+      "splitOn": "@triggerOutputs()?['body/value']",
+      "type": "OpenApiConnection",
+      "inputs": {
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+          "connectionName": "shared_sharepointonline",
+          "operationId": "GetOnUpdatedFileItems"
+        },
+        "parameters": {
+          "dataset": "@parameters('sharepointSiteUrl')",
+          "table": "@parameters('sourceLibrary')",
+          "folderId": "@parameters('sourceFolder')"
+        },
+        "authentication": "@parameters('$authentication')"
+      }
+    }
+  },
+  "actions": {
+    "Get_items_from_configuration_list": {
+      "runAfter": {},
+      "type": "OpenApiConnection",
+      "inputs": {
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+          "connectionName": "shared_sharepointonline",
+          "operationId": "GetItems"
+        },
+        "parameters": {
+          "dataset": "@parameters('sharepointSiteUrl')",
+          "table": "@parameters('configListName')",
+          "$filter": "@parameters('configFilterQuery')",
+          "$top": 1
+        },
+        "authentication": "@parameters('$authentication')"
+      }
+    },
+    "Condition_-_configuration_found": {
+      "runAfter": {
+        "Get_items_from_configuration_list": [
+          "Succeeded"
+        ]
+      },
+      "type": "If",
+      "expression": {
+        "and": [
+          {
+            "greater": [
+              "@length(body('Get_items_from_configuration_list')?['value'])",
+              0
+            ]
+          }
+        ]
+      },
+      "actions": {
+        "Initialize_varReviewer": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varReviewer",
+                "type": "string",
+                "value": "@{first(body('Get_items_from_configuration_list')?['value'])?['__REVIEWER_FIELD_INTERNAL_NAME__']}"
+              }
+            ]
+          }
+        },
+        "Initialize_varApprover": {
+          "runAfter": {
+            "Initialize_varReviewer": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varApprover",
+                "type": "string",
+                "value": "@{first(body('Get_items_from_configuration_list')?['value'])?['__APPROVER_FIELD_INTERNAL_NAME__']}"
+              }
+            ]
+          }
+        },
+        "Initialize_varDestinationPath": {
+          "runAfter": {
+            "Initialize_varApprover": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varDestinationPath",
+                "type": "string",
+                "value": "@{first(body('Get_items_from_configuration_list')?['value'])?['__DESTINATION_PATH_FIELD_INTERNAL_NAME__']}"
+              }
+            ]
+          }
+        },
+        "Start_and_wait_for_an_approval_-_Reviewer": {
+          "runAfter": {
+            "Initialize_varDestinationPath": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+              "connectionName": "shared_approvals",
+              "operationId": "StartAndWaitForAnApproval"
+            },
+            "body": {
+              "approvalType": "ApproveReject",
+              "WebhookApprovalCreationInput/title": "Revisión de documento - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+              "WebhookApprovalCreationInput/assignedTo": "@variables('varReviewer')",
+              "WebhookApprovalCreationInput/details": "Archivo: @{triggerOutputs()?['body/{FilenameWithExtension}']}<br/>Ruta: @{triggerOutputs()?['body/{Path}']}<br/>Link: @{triggerOutputs()?['body/{Link}']}",
+              "WebhookApprovalCreationInput/enableNotifications": true,
+              "WebhookApprovalCreationInput/enableReassignment": false
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Condition_-_reviewer_approved": {
+          "runAfter": {
+            "Start_and_wait_for_an_approval_-_Reviewer": [
+              "Succeeded"
+            ]
+          },
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@outputs('Start_and_wait_for_an_approval_-_Reviewer')?['body/outcome']",
+                  "Approve"
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Start_and_wait_for_an_approval_-_Approver": {
+              "type": "OpenApiConnectionWebhook",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+                  "connectionName": "shared_approvals",
+                  "operationId": "StartAndWaitForAnApproval"
+                },
+                "body": {
+                  "approvalType": "ApproveReject",
+                  "WebhookApprovalCreationInput/title": "Aprobación final - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+                  "WebhookApprovalCreationInput/assignedTo": "@variables('varApprover')",
+                  "WebhookApprovalCreationInput/details": "El revisor aprobó el documento.<br/>Archivo: @{triggerOutputs()?['body/{FilenameWithExtension}']}<br/>Link: @{triggerOutputs()?['body/{Link}']}",
+                  "WebhookApprovalCreationInput/enableNotifications": true,
+                  "WebhookApprovalCreationInput/enableReassignment": false
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_-_approver_approved": {
+              "runAfter": {
+                "Start_and_wait_for_an_approval_-_Approver": [
+                  "Succeeded"
+                ]
+              },
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@outputs('Start_and_wait_for_an_approval_-_Approver')?['body/outcome']",
+                      "Approve"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Get_file_content": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "connectionName": "shared_sharepointonline",
+                      "operationId": "GetFileContent"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('sharepointSiteUrl')",
+                      "id": "@triggerOutputs()?['body/Identifier']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Create_file_in_destination": {
+                  "runAfter": {
+                    "Get_file_content": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "connectionName": "shared_sharepointonline",
+                      "operationId": "CreateFile"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('sharepointSiteUrl')",
+                      "folderPath": "@variables('varDestinationPath')",
+                      "name": "@triggerOutputs()?['body/{FilenameWithExtension}']",
+                      "body": "@body('Get_file_content')"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Send_success_email": {
+                  "runAfter": {
+                    "Create_file_in_destination": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@parameters('notificationEmail')",
+                      "emailMessage/Subject": "Documento publicado - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+                      "emailMessage/Body": "El documento fue aprobado y publicado en: @{variables('varDestinationPath')}",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send_rejection_email_approver": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                        "connectionName": "shared_office365",
+                        "operationId": "SendEmailV2"
+                      },
+                      "parameters": {
+                        "emailMessage/To": "@parameters('notificationEmail')",
+                        "emailMessage/Subject": "Documento rechazado por aprobador - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+                        "emailMessage/Body": "El aprobador rechazó el documento. Revisá la solicitud de aprobación para ver comentarios.",
+                        "emailMessage/Importance": "Normal"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "actions": {
+              "Send_rejection_email_reviewer": {
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                    "connectionName": "shared_office365",
+                    "operationId": "SendEmailV2"
+                  },
+                  "parameters": {
+                    "emailMessage/To": "@parameters('notificationEmail')",
+                    "emailMessage/Subject": "Documento rechazado por revisor - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+                    "emailMessage/Body": "El revisor rechazó el documento. Revisá la solicitud de aprobación para ver comentarios.",
+                    "emailMessage/Importance": "Normal"
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "actions": {
+          "Send_missing_configuration_email": {
+            "type": "OpenApiConnection",
+            "inputs": {
+              "host": {
+                "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                "connectionName": "shared_office365",
+                "operationId": "SendEmailV2"
+              },
+              "parameters": {
+                "emailMessage/To": "@parameters('notificationEmail')",
+                "emailMessage/Subject": "No se encontró configuración - @{triggerOutputs()?['body/{FilenameWithExtension}']}",
+                "emailMessage/Body": "No se encontró ningún registro en la lista de SharePoint para el archivo cargado/modificado.",
+                "emailMessage/Importance": "Normal"
+              },
+              "authentication": "@parameters('$authentication')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {}
+}
