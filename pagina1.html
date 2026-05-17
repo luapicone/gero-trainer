@@ -132,16 +132,16 @@
       align-items: center;
       padding: 118px 0 40px;
       background:
-        linear-gradient(90deg, rgba(7,10,12,.88) 0%, rgba(7,10,12,.42) 46%, rgba(7,10,12,.14) 100%),
-        url('./assets/hermes-portada3.jpg') center top / cover no-repeat;
+        radial-gradient(circle at 72% 42%, rgba(200,255,71,.10), transparent 18%),
+        linear-gradient(180deg, #0d1114 0%, #080b0d 100%);
     }
     .hero-layout {
-      width: min(900px, 100%);
+      width: 100%;
       min-height: calc(100vh - 180px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, .98fr);
+      gap: 34px;
+      align-items: center;
     }
     .eyebrow {
       display: inline-flex;
@@ -159,16 +159,16 @@
       position: static;
       transform: none;
       margin: 0;
-      padding-top: 8px;
     }
-    .hero-bottom {
+    .hero-copy-wrap {
       display: grid;
       gap: 18px;
-      align-content: end;
-      max-width: 760px;
+      max-width: 620px;
+      justify-items: start;
+      text-align: left;
     }
     .hero-copy {
-      max-width: 48ch;
+      max-width: 46ch;
       color: #d4dde1;
       font-size: 1rem;
       line-height: 1.72;
@@ -177,6 +177,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
+      justify-content: flex-start;
     }
     .hero-metrics {
       display: grid;
@@ -184,6 +185,7 @@
       gap: 16px;
       padding-top: 12px;
       max-width: 760px;
+      width: 100%;
     }
     .metric {
       padding-top: 16px;
@@ -204,6 +206,22 @@
       font-size: .74rem;
       letter-spacing: .16em;
       text-transform: uppercase;
+    }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100%;
+    }
+    .hero-figure {
+      width: min(540px, 100%);
+      aspect-ratio: 4 / 5;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18)),
+        url('./assets/hermes-portada3.jpg') center top / cover no-repeat;
+      box-shadow: var(--shadow);
     }
 
     section { padding: 100px 0; }
@@ -493,6 +511,9 @@
       .about-layout,
       .coaching-block { width: 100%; grid-template-columns: 1fr; }
       .hero-layout { min-height: calc(100vh - 172px); }
+      .hero-copy-wrap { max-width: 100%; }
+      .hero-visual { order: -1; min-height: auto; }
+      .hero-figure { width: min(420px, 100%); }
       .programs-grid { grid-template-columns: 1fr; }
       .programs-head,
       .results-head { flex-direction: column; align-items: flex-start; }
@@ -522,7 +543,8 @@
       .nav { width: calc(100% - 20px); top: 10px; }
       .hero { padding: 124px 0 40px; }
       h1 { max-width: none; }
-      .hero-actions { flex-direction: column; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; }
       .hero-metrics { grid-template-columns: 1fr; }
       .program { grid-template-columns: 1fr; }
       .program-image { max-width: 320px; }
@@ -556,11 +578,11 @@
   <main id="inicio" class="hero">
     <div class="container">
       <div class="hero-layout reveal">
-        <div class="hero-heading-group">
-          <div class="eyebrow"><i class="ri-flashlight-line"></i> Argentina</div>
-          <h1><span class="hero-title-line">Menos ruido.</span><span class="hero-title-line">Más resultado.</span></h1>
-        </div>
-        <div class="hero-bottom">
+        <div class="hero-copy-wrap">
+          <div class="hero-heading-group">
+            <div class="eyebrow"><i class="ri-flashlight-line"></i> Argentina</div>
+            <h1><span class="hero-title-line">Menos ruido.</span><span class="hero-title-line">Más resultado.</span></h1>
+          </div>
           <p class="hero-copy">Programas de entrenamiento y coaching para construir un físico más atlético, más fuerte y más trabajado con una estructura seria.</p>
           <div class="hero-actions">
             <a href="#planes" class="btn btn-primary">Ver programas</a>
@@ -571,6 +593,9 @@
             <div class="metric"><strong>4</strong><span>Programas base</span></div>
             <div class="metric"><strong>1:1</strong><span>Seguimiento directo</span></div>
           </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-figure"></div>
         </div>
       </div>
     </div>
